@@ -1,0 +1,2 @@
+ifconfig | grep broadcast | rev | cut -d t -f1 | rev | cut -c2-
+ifconfig en0 | grep netmask | cut -c7- | cut -d n -f1 | rev | cut -c2- | rev
