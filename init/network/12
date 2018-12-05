@@ -1,0 +1,1 @@
+ifconfig en0 | grep inet\  | cut -d t -f2 | cut -c2-  | cut -d \  -f1

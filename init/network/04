@@ -1,0 +1,1 @@
+netstat -arn | grep default | grep 10. | cut -c20- | cut -d ' ' -f1
