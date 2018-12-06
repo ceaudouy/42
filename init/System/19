@@ -1,0 +1,3 @@
+console-setup.sh  dbus        irqbalance         kmod        procps  rsyslog  sudo
+cron              hwclock.sh  keyboard-setup.sh  networking  rsync   ssh      udev
+scripts d'initialisation
