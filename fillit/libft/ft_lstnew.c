@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 16:13:35 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 16:35:03 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/15 11:12:58 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/17 13:03:55 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+t_list	*ft_lstnew(void	const *content, size_t content_size)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
+	t_list	*new;
+
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	if (!content)
+	{
+		new->content = NULL;
+		new->content_size = 0;
+	}
 	else
-		return (0);
+	{
+		if (!(new->content = malloc(sizeof(content))))
+			return (NULL);
+		ft_memcpy(new->content, content, content_size);
+		new->content_size = content_size;
+	}
+	new->next = NULL;
+	return (new);
 }

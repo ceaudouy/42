@@ -6,7 +6,7 @@
 #    By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 19:26:12 by ceaudouy          #+#    #+#              #
-#    Updated: 2018/11/26 13:22:37 by ceaudouy         ###   ########.fr        #
+#    Updated: 2018/11/28 14:54:39 by ceaudouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,15 +36,20 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 .c.o:
+	@$(CC) -c -I./includes $(CFLAGS) $(SRC)
+
 
 $(NAME) : $(OBJ)
-	$(CC) -c $(FLAGS) $(SRC)
-	ar rcs $(NAME) $(OBJ) 
+	@ar rcs $(NAME) $(OBJ) 
+	@rm -f $(OBJ)
+	@echo "libft.a"
 
 clean : 
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "RM *.o"
 
 fclean : clean
-	rm -f $(OBJ) $(NAME)
+	@rm -f $(OBJ) $(NAME)
+	@echo "RM libft.a"
 
 re : fclean all

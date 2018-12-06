@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 16:21:00 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 16:32:52 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/08 15:17:22 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/12 18:52:09 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isalnum(int c)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	else
-		return (0);
+	unsigned char	*c;
+	unsigned char	*d;
+	unsigned int	i;
+
+	i = 0;
+	c = (unsigned char*)dst;
+	d = (unsigned char*)src;
+	while (i < n)
+	{
+		c[i] = d[i];
+		i++;
+	}
+	return (c);
 }

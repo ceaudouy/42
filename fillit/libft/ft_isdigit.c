@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 15:18:54 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 16:35:35 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/09 16:13:35 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/09 16:20:37 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+int		ft_isdigit(int c)
 {
-	t_list	*tmp;
-	t_list	*tmp1;
-
-	tmp1 = *alst;
-	while (tmp1)
-	{
-		tmp = tmp1;
-		tmp1 = tmp1->next;
-		del(tmp->content, tmp->content_size);
-		free(tmp);
-	}
-	*alst = NULL;
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
 }

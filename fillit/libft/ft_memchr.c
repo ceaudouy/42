@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 10:20:08 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 16:35:51 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/08 17:04:21 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/12 17:57:34 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	while (lst)
+	size_t			i;
+	unsigned char	*t;
+	unsigned char	d;
+
+	d = (unsigned char)c;
+	t = (unsigned char*)s;
+	i = 0;
+	while (i < n)
 	{
-		f(lst);
-		lst = lst->next;
+		if (t[i] == d)
+			return (&t[i]);
+		i++;
 	}
+	return (NULL);
 }

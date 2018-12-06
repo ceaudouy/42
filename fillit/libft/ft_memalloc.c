@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 11:06:09 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 16:36:00 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/11 14:06:58 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/16 17:53:24 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+void	*ft_memalloc(size_t size)
 {
-	t_list	*new;
-	t_list	*tmp;
+	size_t	i;
+	char	*new;
 
-	if (lst && f)
+	i = 0;
+	if (!(new = (char*)malloc(sizeof(*new) * size)))
+		return (NULL);
+	while (i < size)
 	{
-		if (!(new = (t_list *)malloc(sizeof(t_list))))
-			return (0);
-		tmp = f(lst);
-		new = tmp;
-		while (lst->next)
-		{
-			lst = lst->next;
-			if (!(tmp->next = f(lst)))
-			{
-				free(tmp->next);
-				return (NULL);
-			}
-			tmp = tmp->next;
-		}
-		return (new);
+		new[i] = 0;
+		i++;
 	}
-	return (NULL);
+	new[i] = '\0';
+	return (&new[0]);
 }

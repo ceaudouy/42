@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 18:52:38 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 16:36:29 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/09 16:53:40 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/09 16:58:11 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+int		ft_isascii(int c)
 {
-	unsigned int	i;
-	unsigned char	*dest;
-	unsigned char	*srce;
-	unsigned char	stp;
-
-	stp = (unsigned char)c;
-	dest = (unsigned char*)dst;
-	srce = (unsigned char*)src;
-	i = 0;
-	while (i < n)
-	{
-		dest[i] = srce[i];
-		if (srce[i] == stp)
-			return (&dest[i + 1]);
-		i++;
-	}
-	return (NULL);
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
 }
