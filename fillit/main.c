@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/06 17:41:06 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:54:59 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,22 @@
 char	**ft_read(int fd, char **tab)
 {
 	int		i;
-	char	buf[17];
+	char	buf[22];
 	char	*tmp;
 	int		ret;
 
 	i = 0;
-	while ((ret = read(fd, buf, 16) > 0))
+	while ((ret = read(fd, buf, 21) > 0))
 	{
-		buf[16] = '\0';
-		if (tab[i] == NULL)
-			ft_strnew(1);
-		tmp = tab[i];
-		tab[i] = ft_strjoin(tab[i], buf);
-		free(tmp);
+		buf[21] = '\0';
+		tab[i] = ft_strdup(buf);
+		if (ft_checkerror(tab[i]) == 1)
+			return (NULL);	
 		i++;
 	}
 	if (ret < 0)
 		return (NULL);
 	tab[i] = 0;
-	if (ft_checkerror(tab) == 1)
-	   return (NULL);	
 	return (tab);	
 }
 

@@ -1,1 +1,1 @@
-ping -c 1 slash16.org | grep PING | cut -d \( -f2 | cut -d \) -f1
+nslookup slash16.org

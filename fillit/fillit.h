@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:22:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/06 17:40:32 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/07 12:19:57 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # include "libft/includes/libft.h"
 
 char	**ft_read(int fd, char **tab);
-int		ft_checkerror(char **tab);
+int		ft_checkerror(char *tab);
 
 #endif
