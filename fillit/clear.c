@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkerror.c                                       :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/07 12:13:07 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 14:32:09 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/12/10 12:17:47 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/12/10 12:29:13 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_checkerror(char *tab)
+char	*ft_clear(char *tab)
 {
-	int 	i;
-	int		d;
+	int		i;
 	int		p;
+	int		h;
 
 	i = 0;
-	d = 0;
-	p = 0;
-	if (tab[i] == '\n')
-		return (1);
-	while (tab[i] && ( tab[i] == '.' || tab[i] == '#' || tab[i] == '\n'))
-	{
-		if (tab[i] == '.')
+	while (tab[i])
+	{ 
+		p = 0;
+		while (tab[i] == ".")
+		{	
+			if (i % 4 == 0 && p == 4)
+				break;
+			i++;
 			p++;
-		if (tab[i] == '#')
-			d++;
+		}
+
+		if (tab[i] == "#")
+			h++;
 		i++;
 	}
-	if ((ft_strlen(tab) == i && d == 4 && p == 12 && tab[i - 1] == '\n'))
-		return (0);
-	return (1);
 }
