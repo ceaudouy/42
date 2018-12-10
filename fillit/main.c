@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 16:54:39 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:40:20 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	**ft_read(int fd, char **tab)
 	{
 		buf[21] = '\0';
 		tab[i] = ft_strdup(buf);
-		ft_putstr(tab[i]);
 		if (ft_checkerror(tab[i]) == 1 || ft_check_tetri(tab[i]) == 1)
 			return (NULL);
 		if (i == 27)
@@ -34,6 +33,7 @@ char	**ft_read(int fd, char **tab)
 	if (ret < 0)
 		return (NULL);
 	tab[i] = 0;
+	ft_letter(tab);
 	return (tab);
 }
 

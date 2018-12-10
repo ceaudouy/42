@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   letter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 12:22:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 17:38:12 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/12/10 17:29:10 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/12/10 17:43:07 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "fillit.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "libft/includes/libft.h"
+void	ft_letter(char **tab)
+{
+	int	i;
+	int j;
+	int letter;
 
-char	**ft_read(int fd, char **tab);
-int		ft_checkerror(char *tab);
-int		ft_check_tetri(char *tab);
-void	ft_letter(char	**tab);
-#endif
+	i = 0;
+	letter = 'A';
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (tab[i][j] == '#')
+				tab[i][j] = letter;
+			j++;
+		}
+		ft_putstr(tab[i]);
+		i++;
+		letter++;
+	}
+}
