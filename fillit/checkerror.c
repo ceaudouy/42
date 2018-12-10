@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 12:13:07 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 14:32:09 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:34:30 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_checkerror(char *tab)
 {
-	int 	i;
+	int		i;
 	int		d;
 	int		p;
 
@@ -23,7 +23,7 @@ int		ft_checkerror(char *tab)
 	p = 0;
 	if (tab[i] == '\n')
 		return (1);
-	while (tab[i] && ( tab[i] == '.' || tab[i] == '#' || tab[i] == '\n'))
+	while (tab[i] && (tab[i] == '.' || tab[i] == '#' || tab[i] == '\n'))
 	{
 		if (tab[i] == '.')
 			p++;

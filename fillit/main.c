@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 14:58:38 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/10 16:33:37 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ char	**ft_read(int fd, char **tab)
 		tab[i] = ft_strdup(buf);
 		ft_putstr(tab[i]);
 		if (ft_checkerror(tab[i]) == 1)
-			return (NULL);	
-		if (ft_check_tetri_diag(tab[i]) == 1)
-			return (NULL);	
+			return (NULL);
+		if (ft_check_tetri(tab[i]) == 1)
+			return (NULL);
 		i++;
 	}
 	if (ret < 0)
 		return (NULL);
 	tab[i] = 0;
-	return (tab);	
+	return (tab);
 }
 
 int		main(int ac, char **av)
