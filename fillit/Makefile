@@ -6,7 +6,7 @@
 #    By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 11:06:56 by ceaudouy          #+#    #+#              #
-#    Updated: 2018/12/11 11:50:39 by ceaudouy         ###   ########.fr        #
+#    Updated: 2018/12/11 12:24:24 by ceaudouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,13 @@ LIBFT = libft/libft.a
 
 all : $(NAME)
 
-.c.o :
+make :
+	@make -b -C libft/ all
 
-$(NAME) :
-	@make -C libft/ all
-	@$(CC) -o $(NAME) $(CFLAGS) $(SRC) $(LIBFT) -I $(INCLUDES)
-	@echo fillit
+
+$(NAME) : make 
+	$(CC) -o $(NAME) $(CFLAGS) $(SRC) $(LIBFT) -I $(INCLUDES)
+	@echo ./fillit
 
 clean :
 	@rm -f $(OBJ)
