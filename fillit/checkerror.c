@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 12:13:07 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 16:43:42 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/11 11:49:28 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_checkerror(char *tab)
 			d++;
 		i++;
 	}
-	if ((ft_strlen(tab) == i && d == 4 && p == 12 && tab[i - 1] == '\n'))
+	if (ft_strlen(tab) == (size_t)i && d == 4 && p == 12 && tab[i - 1] == '\n')
 		return (0);
 	return (1);
 }

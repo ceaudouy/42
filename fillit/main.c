@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 17:40:20 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/11 11:22:47 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	**ft_read(int fd, char **tab)
 {
 	int		i;
 	char	buf[22];
-	char	*tmp;
 	int		ret;
 
 	i = 0;

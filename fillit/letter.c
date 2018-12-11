@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:29:10 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/10 17:43:07 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/11 11:47:03 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_letter(char **tab)
 				tab[i][j] = letter;
 			j++;
 		}
-		ft_putstr(tab[i]);
 		i++;
 		letter++;
 	}
