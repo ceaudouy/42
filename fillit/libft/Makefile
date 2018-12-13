@@ -6,7 +6,7 @@
 #    By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 19:26:12 by ceaudouy          #+#    #+#              #
-#    Updated: 2018/12/11 11:19:40 by ceaudouy         ###   ########.fr        #
+#    Updated: 2018/12/12 14:05:25 by ceaudouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,26 +29,22 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	  ft_putnbr.c ft_putnbr_fd.c ft_itoa.c ft_lstnew.c ft_lstadd.c \
 	  ft_lstdelone.c ft_lstdel.c ft_lstiter.c ft_lstmap.c ft_print_tab.c \
 	  ft_strrev.c ft_swap.c ft_sort_params.c ft_print_params.c ft_strndup.c \
-	  get_next_line.c
+	  get_next_line.c ft_sqrt.c
 
 OBJ = $(SRC:.c=.o) 
 
 all : $(NAME)
 
 .c.o:
-	@$(CC) -c -I./includes $(CFLAGS) $(SRC)
-
+	@$(CC) -c -I $(CFLAGS) $(SRC)
 
 $(NAME) : $(OBJ)
 	@ar rcs $(NAME) $(OBJ) 
-	@echo "libft.a"
 
 clean : 
 	@rm -f $(OBJ)
-	@echo "RM *.o"
 
 fclean : clean
 	@rm -f $(OBJ) $(NAME)
-	@echo "RM libft.a"
 
 re : fclean all

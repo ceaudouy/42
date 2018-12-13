@@ -6,13 +6,13 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 12:13:07 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/11 11:49:28 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/13 11:39:40 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_checkerror(char *tab)
+int			ft_checkerror(char *tab)
 {
 	int		i;
 	int		d;
@@ -31,7 +31,7 @@ int		ft_checkerror(char *tab)
 			d++;
 		i++;
 	}
-	if (ft_strlen(tab) == (size_t)i && d == 4 && p == 12 && tab[i - 1] == '\n')
+	if (d == 4 && p == 12 && tab[i - 1] == '\n')
 		return (0);
 	return (1);
 }

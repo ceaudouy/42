@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/11 11:22:47 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/13 11:25:53 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 char	**ft_read(int fd, char **tab)
 {
 	int		i;
-	char	buf[22];
+	char	buf[21];
 	int		ret;
 
 	i = 0;
 	while ((ret = read(fd, buf, 21) > 0))
 	{
-		buf[21] = '\0';
+		buf[20] = '\0';
 		tab[i] = ft_strdup(buf);
 		if (ft_checkerror(tab[i]) == 1 || ft_check_tetri(tab[i]) == 1)
 			return (NULL);
@@ -32,18 +32,18 @@ char	**ft_read(int fd, char **tab)
 	if (ret < 0)
 		return (NULL);
 	tab[i] = 0;
-	ft_letter(tab);
 	return (tab);
 }
 
 int		main(int ac, char **av)
 {
 	int		fd;
+	int		grid;
 	char	**tab;
 
 	if (ac != 2)
 	{
-		ft_putstr("error\n");
+		ft_putstr("usage: ./fillit sample.fillit\n");
 		return (0);
 	}
 	if (!(tab = (char**)malloc(sizeof(*tab) * 27)))
@@ -55,6 +55,9 @@ int		main(int ac, char **av)
 		close(fd);
 		return (0);
 	}
+	grid = ft_grid(tab);
+	ft_letter(tab);
+	ft_solve(tab, grid);
 	close(fd);
 	return (0);
 }

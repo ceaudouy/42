@@ -6,7 +6,7 @@
 #    By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 11:06:56 by ceaudouy          #+#    #+#              #
-#    Updated: 2018/12/11 12:24:24 by ceaudouy         ###   ########.fr        #
+#    Updated: 2018/12/12 14:13:51 by ceaudouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRC = main.c checkerror.c letter.c 
+SRC = main.c checkerror.c letter.c grid.c
 
 INCLUDES = fillit.h
 
@@ -25,21 +25,16 @@ LIBFT = libft/libft.a
 all : $(NAME)
 
 make :
-	@make -b -C libft/ all
-
-
+	@make -C libft/ all
+	
 $(NAME) : make 
-	$(CC) -o $(NAME) $(CFLAGS) $(SRC) $(LIBFT) -I $(INCLUDES)
-	@echo ./fillit
+	$(CC) -o $(NAME) $(CFLAGS) -fsanitize=address $(SRC) $(LIBFT) -I $(INCLUDES)
 
 clean :
-	@rm -f $(OBJ)
 	@make -C libft/ clean
-	@echo clean
 
 fclean : clean
 	@rm -f $(NAME)
 	@make -C libft/ fclean
-	@echo fclean
 
 re : fclean all
