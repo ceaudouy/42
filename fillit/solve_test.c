@@ -6,13 +6,12 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:31:18 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/21 11:35:49 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:42:40 by mascorpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-
 int		ft_checkpos(char *fgrid, char *tab, int f, int g)
 {
 	int		j;
@@ -20,7 +19,7 @@ int		ft_checkpos(char *fgrid, char *tab, int f, int g)
 
 	j = 0;
 	cnt = 0;
-	while (tab[j] && fgrid[f + g - 3])
+	while (tab[j] && fgrid[f])
 	{
 		if (fgrid[f] == '.' && (tab[j] >= 65 && tab[j] <= 90))
 			cnt++;
@@ -43,7 +42,9 @@ char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
 	while (tab[i])
 	{
 		if (f >= ft_strlen(fgrid))
+		{
 			return (fgrid);
+		}
 		j = 0;
 		while (tab[i][j] == '.' || tab[i][j] == '\n')
 			j++;
@@ -51,7 +52,7 @@ char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
 			f++;
 		if ((ft_checkpos(fgrid, &tab[i][j], f, g) == 0))
 		{
-			while (tab[i][j])
+			while (tab[i][j] && fgrid[f + g - 3])
 			{
 				if (fgrid[f] == '.' && (tab[i][j] >= 65 && tab[i][j] <= 90))
 					fgrid[f] = tab[i][j];
@@ -71,13 +72,14 @@ char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
 			j = 0;
 			f = 0;
 			start = 0;
-			if ( i == -1)
+			if (i == -1)
 			{
+				free(fgrid);
 				return (ft_solve(tab, g + 1));
 			}
 			while (tab[i][j] == '.' || tab[i][j] == '\n')
 				j++;
-			while (fgrid[start] != tab[i][j])
+			while (fgrid[start] != tab[i][j]) 
 				start++; 
 			start++;
 			while (fgrid[f])
@@ -100,7 +102,8 @@ char	*ft_solve(char **tab, int g)
 	tot = ((g + 1) * g);
 	if (!(fgrid = (char *)malloc(sizeof(*fgrid) *(tot + 1))))
 		return (NULL);
-	ft_clear(fgrid, g);
+	fgrid = ft_clear(fgrid, g);
 	fgrid = ft_backtrack(fgrid, tab, g, 0, 0);
+//		printf("rendu\n%s\n", fgrid);
 	return (fgrid);
 }

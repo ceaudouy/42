@@ -6,13 +6,12 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:31:18 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/21 11:35:49 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/20 12:04:58 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-
 int		ft_checkpos(char *fgrid, char *tab, int f, int g)
 {
 	int		j;
@@ -20,7 +19,7 @@ int		ft_checkpos(char *fgrid, char *tab, int f, int g)
 
 	j = 0;
 	cnt = 0;
-	while (tab[j] && fgrid[f + g - 3])
+	while (tab[j])
 	{
 		if (fgrid[f] == '.' && (tab[j] >= 65 && tab[j] <= 90))
 			cnt++;
@@ -34,16 +33,20 @@ int		ft_checkpos(char *fgrid, char *tab, int f, int g)
 	return (1);
 }
 
-char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
+char	*ft_backtrack(char *fgrid, char **tab, int i, int start)
 {
 	int			j;
 	size_t		f;
+	int			g;
 
+	g = ft_grid(tab);
 	f = start;
 	while (tab[i])
 	{
 		if (f >= ft_strlen(fgrid))
+		{
 			return (fgrid);
+		}
 		j = 0;
 		while (tab[i][j] == '.' || tab[i][j] == '\n')
 			j++;
@@ -73,20 +76,21 @@ char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
 			start = 0;
 			if ( i == -1)
 			{
+				ft_strdel(&fgrid);
 				return (ft_solve(tab, g + 1));
 			}
-			while (tab[i][j] == '.' || tab[i][j] == '\n')
+			while (tab[i][j] == '.' || tab[i][j] == '\n') // caractere recheche
 				j++;
-			while (fgrid[start] != tab[i][j])
+			while (fgrid[start] != tab[i][j]) // derniere position commence
 				start++; 
-			start++;
-			while (fgrid[f])
+			start++; // pos + 1
+			while (fgrid[f]) //dell caractere voulu
 			{
 				if (fgrid[f] == tab[i][j])
 					fgrid[f] = '.';
 				f++;
 			}
-			return (ft_backtrack(fgrid, tab, g, i, start));
+			return (ft_backtrack(fgrid, tab, i, start + 1));
 		}
 	}
 	return (fgrid);
@@ -97,10 +101,9 @@ char	*ft_solve(char **tab, int g)
 	int		tot;
 	char	*fgrid;
 	
-	tot = ((g + 1) * g);
-	if (!(fgrid = (char *)malloc(sizeof(*fgrid) *(tot + 1))))
+	if (!(fgrid = (char *)malloc(sizeof(*fgrid) *(g + 1))))
 		return (NULL);
 	ft_clear(fgrid, g);
-	fgrid = ft_backtrack(fgrid, tab, g, 0, 0);
+	fgrid = ft_backtrack(fgrid, tab, 0, 0);
 	return (fgrid);
 }
