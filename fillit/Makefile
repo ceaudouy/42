@@ -6,7 +6,7 @@
 #    By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/11 11:06:56 by ceaudouy          #+#    #+#              #
-#    Updated: 2018/12/20 19:03:13 by ceaudouy         ###   ########.fr        #
+#    Updated: 2018/12/30 11:25:55 by ceaudouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRC = main.c checkerror.c letter.c grid.c clear.c\
-	  solve.c 
+SRC = main2.c checkerror.c letter.c grid.c clear.c\
+	  free.c solve2.c 
 
 INCLUDES = fillit.h
 

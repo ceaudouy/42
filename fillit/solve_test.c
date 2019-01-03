@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 15:31:18 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/21 12:42:40 by mascorpi         ###   ########.fr       */
+/*   Updated: 2018/12/28 13:27:09 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
 			f++;
 		if ((ft_checkpos(fgrid, &tab[i][j], f, g) == 0))
 		{
-			while (tab[i][j] && fgrid[f + g - 3])
+			while (tab[i][j] && fgrid[f])
 			{
 				if (fgrid[f] == '.' && (tab[i][j] >= 65 && tab[i][j] <= 90))
 					fgrid[f] = tab[i][j];
@@ -82,6 +82,8 @@ char	*ft_backtrack(char *fgrid, char **tab, int g, int i, int start)
 			while (fgrid[start] != tab[i][j]) 
 				start++; 
 			start++;
+			if (start >= ft_strlen(fgrid) - 1)
+				return (fgrid);
 			while (fgrid[f])
 			{
 				if (fgrid[f] == tab[i][j])
