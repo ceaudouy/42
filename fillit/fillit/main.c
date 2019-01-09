@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/30 11:31:17 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/01/09 15:40:16 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char			**ft_read(int fd, char **tab)
 	int		ret;
 
 	i = 0;
-	while (i < 27)
+	while (i < 28)
 		tab[i++] = 0;
 	if (!(buf = ft_strnew(21)))
 		return (ft_free_leaks(buf, tab));
@@ -30,27 +30,39 @@ char			**ft_read(int fd, char **tab)
 			return (ft_free_leaks(buf, tab));
 		ft_bzero(buf, 21);
 		if (ft_checkerror(tab[i]) == 1 || ft_check_tetri(tab[i]) == 1 ||
-				i == 27)
+				i == 28)
 			return (ft_free_leaks(buf, tab));
 		i++;
 	}
-	tab[i] = 0;
 	if (ret < 0 || (ret == 0 && !tab[1]) || (ft_check_end(tab[i - 1]) == 1))
 		return (ft_free_leaks(buf, tab));
 	free(buf);
 	return (tab);
 }
 
-static void		ft_exec(char **tab)
+int				ft_exec(char **tab)
 {
 	size_t		g;
-	char	*fgrid;
+	int			**info;
+	int			i;
+	char		*fgrid;
 
 	g = ft_grid(tab);
-	ft_letter(tab);
-	fgrid = ft_solve(tab, g);
-	ft_putstr(tab[0]);
-	free(fgrid);
+	i = 1;
+	if (!(info = (int **)malloc(sizeof(*info) * 28)))
+		return (1);
+	while (tab[i])
+	{
+		info[i] = ft_parsing(tab[i], 0, 0, 0);
+		tab[i] = ft_clear_tetri(tab[i], info[i], 3, 3);
+		free(info[i]);
+		i++;
+	}
+	free(info);
+	if (!(fgrid = ft_solve(tab, g)))
+		ft_free_main(tab);
+	ft_putstr(fgrid);
+	return (0);
 }
 
 int				main(int ac, char **av)
@@ -66,7 +78,7 @@ int				main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd > 0)
 	{
-		if (!(tab = (char**)malloc(sizeof(*tab) * 28)))
+		if (!(tab = (char**)malloc(sizeof(char*) * 28)))
 		{
 			close(fd);
 			return (0);

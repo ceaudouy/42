@@ -6,7 +6,7 @@
 /*   By: mascorpi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 10:38:49 by mascorpi          #+#    #+#             */
-/*   Updated: 2018/12/31 12:11:27 by mascorpi         ###   ########.fr       */
+/*   Updated: 2019/01/09 16:56:19 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ char	**ft_free_leaks(char *buf, char **tab)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	free(buf);
+	buf = NULL;
 	while (tab[i])
 	{
 		free(tab[i]);
@@ -27,6 +28,12 @@ char	**ft_free_leaks(char *buf, char **tab)
 	free(tab);
 	tab = NULL;
 	return (NULL);
+}
+
+void	ft_free_info(int *info)
+{
+	free(info);
+	info = NULL;
 }
 
 void	ft_free_main(char **tab)

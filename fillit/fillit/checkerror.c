@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 12:13:07 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/12/28 10:58:05 by mascorpi         ###   ########.fr       */
+/*   Updated: 2019/01/09 13:04:42 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,15 @@ int			ft_check_tetri(char *tab)
 	}
 	return (0);
 }
-int		ft_check_end(char *tab)
+
+int			ft_check_end(char *tab)
 {
-	int	j;
-	int	n;
+	int		j;
+	int		n;
 
 	j = 0;
 	n = 0;
-	while(tab[j])
+	while (tab[j])
 	{
 		if (tab[j] == '\n')
 			n++;
@@ -92,4 +93,3 @@ int		ft_check_end(char *tab)
 		return (1);
 	return (0);
 }
-
