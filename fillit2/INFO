@@ -1,4 +1,0 @@
-1 leaks
-le leaks doit venir de notre ft_solve quand on free(info) a voir et aussi a revoir ce free.
-programme fonctionne toujours pas avec ~14/15 tetrimimos
-
