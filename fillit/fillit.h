@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:22:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/09 17:07:46 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/01/10 11:56:35 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "libft/libft.h"
 
-char	**ft_read(int fd, char **tab);
 int		ft_checkerror(char *tab);
 int		ft_check_tetri(char *tab);
 int		ft_check_end(char *tab);

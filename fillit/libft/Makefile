@@ -6,7 +6,7 @@
 #    By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 19:26:12 by ceaudouy          #+#    #+#              #
-#    Updated: 2018/12/12 14:05:25 by ceaudouy         ###   ########.fr        #
+#    Updated: 2019/01/10 15:44:45 by ceaudouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJ = $(SRC:.c=.o)
 all : $(NAME)
 
 .c.o:
-	@$(CC) -c -I $(CFLAGS) $(SRC)
+	@$(CC) -c $^ -o $@ -I $(CFLAGS)
 
 $(NAME) : $(OBJ)
 	@ar rcs $(NAME) $(OBJ) 

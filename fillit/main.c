@@ -6,13 +6,13 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/09 15:40:16 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/01/10 16:02:33 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char			**ft_read(int fd, char **tab)
+static char			**ft_read(int fd, char **tab)
 {
 	int		i;
 	char	*buf;
@@ -30,7 +30,7 @@ char			**ft_read(int fd, char **tab)
 			return (ft_free_leaks(buf, tab));
 		ft_bzero(buf, 21);
 		if (ft_checkerror(tab[i]) == 1 || ft_check_tetri(tab[i]) == 1 ||
-				i == 28)
+				i >= 27)
 			return (ft_free_leaks(buf, tab));
 		i++;
 	}
@@ -40,7 +40,7 @@ char			**ft_read(int fd, char **tab)
 	return (tab);
 }
 
-int				ft_exec(char **tab)
+static int			ft_exec(char **tab)
 {
 	size_t		g;
 	int			**info;
@@ -65,7 +65,7 @@ int				ft_exec(char **tab)
 	return (0);
 }
 
-int				main(int ac, char **av)
+int					main(int ac, char **av)
 {
 	int		fd;
 	char	**tab;
