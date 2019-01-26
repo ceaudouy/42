@@ -1,1 +1,1 @@
-/etc/dnsextd.conf
+cat /etc/hosts

@@ -1,2 +1,2 @@
 en session graphique: rentrer son login et son password lors de la connection.
-en session ssh: su ID
+en session ssh: ssh login@domain || ssh login@ip
