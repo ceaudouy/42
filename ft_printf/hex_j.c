@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags.c                                            :+:      :+:    :+:   */
+/*   hex_j.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/21 12:32:01 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/24 10:57:30 by ceaudouy         ###   ########.fr       */
+/*   Created: 2019/02/05 11:28:40 by ceaudouy          #+#    #+#             */
+/*   Updated: 2019/02/10 15:11:41 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_string(va_list ap)
+char	*ft_hex_j(va_list ap)
 {
-	char	*str;
+	unsigned long	i;
+	int				cnt;
+	unsigned long	nb;
+	char const		*base;
+	char			*res;
 
-	if (!(str = va_arg(ap, char*)))
-		str = "(null)";
-	return (str);
-}
-
-char		*ft_char(va_list ap)
-{
-	int		c;
-	char	*str;
-
-	if (!(str = (char*)malloc(sizeof(*str) * 2)))
+	cnt = 0;
+	i = va_arg(ap, unsigned long);
+	nb = i;
+	while ((i / 16) > 0)
+	{
+		cnt++;
+		i /= 16;
+	}
+	if (!(res = (char*)malloc(sizeof(*res) * cnt + 1)))
 		return (NULL);
-	if (!(c = va_arg(ap, int)) || c == '\0')
-		str[0] = '\0';
-	else
-		str[0] = c;
-	str[1] = '\0';
-	return (str);
+	base = "0123456789abcdef";
+	i = cnt;
+	while (cnt >= 0)
+	{
+		res[cnt--] = (base[(nb % 16)]);
+		nb /= 16;
+	}
+	res[i + 1] = '\0';
+	return (res);
 }

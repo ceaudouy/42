@@ -6,17 +6,16 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 13:08:03 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/30 13:08:05 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/02/10 16:24:00 by mascorpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int         *ft_flags(t_struct *all, size_t i)
+int		*ft_flags(t_struct *all, size_t i)
 {
-	if (all->format[i + 1] >= '1' && all->format[i + 1] <= '9')
-		all->option[6] = 1;
-    while (all->format[i] && (!(all->format[i] >= 'a' && all->format[i] <= 'z')))
+	while (all->format[i] && (!(all->format[i] >= 'a' &&
+					all->format[i] <= 'z')))
 	{
 		if (all->format[i] == '-')
 			all->option[0] = 1;
@@ -24,45 +23,47 @@ int         *ft_flags(t_struct *all, size_t i)
 			all->option[1] = 1;
 		else if (all->format[i] == ' ')
 			all->option[2] = 1;
-		else if ((all->format[i] == '0') && 
+		else if ((all->format[i] == '0') &&
 				(!(all->format[i - 1] >= '0' && all->format[i - 1] <= '9')))
 			all->option[3] = 1;
 		else if (all->format[i] == '#')
 			all->option[4] = 1;
-		else if (all->option[4] == 1 && all->format[i] >= '1' &&
-				 all->format[i] <= '9')
+		else if (all->format[i] >= '1' && all->format[i] <= '9')
 			all->option[6] = 1;
-        else if (all->format[i] == '.')
-            all->option[5] = 1;
+		else if (all->format[i] == '.')
+			all->option[5] = 1;
 		i++;
 	}
-	if (all->option[0] == 0 && all->option[1] == 0 && all->option[2] == 0 && all->option[3] == 0
-			&& all->option[4] == 0 && all->option[5] == 0 && all->option[6 == 0])
+	if (all->option[0] == 0 && all->option[1] == 0 &&
+		all->option[2] == 0 && all->option[3] == 0 &&
+		all->option[4] == 0 && all->option[5] == 0 && all->option[6] == 0)
 		all->option[7] = 1;
-    return (all->option);
+	return (all->option);
 }
 
-int			ft_option(t_struct *all, size_t i)
+int		ft_option(va_list ap, t_struct *all, size_t i)
 {
-    all->option = ft_flags(all, i);
-	/*printf("option[0] == %d\n", all->option[0]);
-	printf("option[1] == %d\n", all->option[1]);
-	printf("option[2] == %d\n", all->option[2]);
-	printf("option[3] == %d\n", all->option[3]);
-	printf("option[4] == %d\n", all->option[4]);
-	printf("option[5] == %d\n", all->option[5]);
-	printf("option[6] == %d\n", all->option[6]);
-   	*/if (all->option[0] == 1)
-        all->ret = ft_neg(all, i);
-    else if (all->option[1] == 1)
-        all->ret = ft_plus(all, i);
+	int		j;
+
+	j = 0;
+	while (j <= 7)
+		all->option[j++] = 0;
+	all->option = ft_flags(all, i);
+	if (all->option[4] == 1 && (!(all->flag >= 28 && all->flag <= 30)))
+		ft_diese(all, i);
+	else if (all->option[5] == 1)
+		ft_preci(ap, all, i);
 	else if (all->option[2] == 1)
-		all->ret = ft_space(all, i); 
+		ft_space(all, i, 0);
 	else if (all->option[3] == 1)
-		all->ret = ft_zero(all, i);
-	else if (all->option[4] == 1)	
-		all->ret = ft_diese(all, i);
+		ft_zero(all, i, 0);
+	else if (all->option[0] == 1)
+		ft_neg(all, i, 0);
+	else if (all->option[1] == 1)
+		ft_plus(all, i, 0);
+	else if (all->option[7] == 1)
+		ft_noflag(all, ap);
 	else if (all->option[6] == 1)
-		all->ret += ft_noflag(all, i);  
-    return (all->ret);
-} 
+		ft_nbr(all, i);
+	return (all->ret);
+}

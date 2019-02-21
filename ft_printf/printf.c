@@ -1,3 +1,4 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   printf.c                                           :+:      :+:    :+:   */
@@ -5,13 +6,13 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 12:16:50 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/29 16:41:11 by mascorpi         ###   ########.fr       */
+/*   Updated: 2019/02/10 17:13:32 by mascorpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_l(const char *c)
+int			ft_l(const char *c)
 {
 	if (*c == 'o')
 		return (11);
@@ -26,23 +27,11 @@ int		ft_l(const char *c)
 	if (*c == 'f')
 		return (29);
 	if (*c == 'l')
-	{
-		c++;
-		if (*c == 'o')
-			return (12);
-		if (*c == 'u')
-			return (17);
-		if (*c == 'x')
-			return (22);
-		if (*c == 'd' || *c == 'i')
-			return (4);
-		if (*c == 'X')
-			return (27);
-	}
+		return (ft_l_2(c));
 	return (-1);
 }
 
-int		ft_h(const char *c)
+int			ft_h(const char *c)
 {
 	if (*c == 'd' || *c == 'i')
 		return (6);
@@ -71,9 +60,11 @@ int		ft_h(const char *c)
 	return (-1);
 }
 
-int		ft_checkflag(const char *c, int i)
+int			ft_checkflag(const char *c, size_t i)
 {
-	while (i < 5)
+	int		ret;
+
+	while (i < ft_strlen(c))
 	{
 		if (c[i] == 'd' || c[i] == 'i')
 			return (0);
@@ -87,114 +78,58 @@ int		ft_checkflag(const char *c, int i)
 			return (ft_l(&c[i + 1]));
 		if (c[i] == 'h')
 			return (ft_h(&c[i + 1]));
-		if (c[i] == 'o')
-			return (8);
-		if (c[i] == 'p')
-			return (5);
-		if (c[i] == 'u')
-			return (13);
-		if (c[i] == 'x')
-			return (18);
-		if (c[i] == 'X')
-			return (23);
-		if (c[i] == 'f')
-			return (28);
+		ret = ft_checkflag2(c, i);
+		if (ret > -1)
+			return (ret);
 		i++;
 	}
 	return (-1);
 }
 
-int			ft_par(const char *restrict format, va_list ap)
+int			ft_par(va_list ap, t_struct *all)
 {
-	size_t	i;
-	t_struct *all;
+	int	i;
+
+	i = 0;
+	if (!(all->option = (int*)malloc(sizeof(int) * 8)))
+		return (0);
+	while (i < 8)
+		all->option[i++] = 0;
+	i = 0;
+	while (all->format[i] && (size_t)i < ft_strlen(all->format))
+	{
+		if (all->format[i] == '%')
+		{
+			if (all->format[i] == '%')
+				i = ft_modulo(all, i, ap);
+			if (i == -1)
+				return (all->ret);
+		}
+		else if (all->format[i] && ft_strlen(all->format) > (size_t)i)
+		{
+			all->ret++;
+			ft_putchar(all->format[i]);
+		}
+		i++;
+	}
+	return (all->ret);
+}
+
+int			ft_printf(const char *restrict format, ...)
+{
+	va_list		ap;
+	int			cnt;
+	t_struct	*all;
 
 	if (!(all = malloc(sizeof(t_struct) * 1)))
 		return (0);
 	all->format = format;
 	all->ret = 0;
-	i = 0;
-	if (!(all->option = (int*)malloc(sizeof(int) * 8)))
-		return(0);
-	while (i < 8)
-		all->option[i++] = 0;
-	i = 0;
-	while (all->format[i])
-	{
-		if (all->format[i] == '%')
-		{
-			if (all->format[i + 1] == '%')
-				i++;
-			else
-			{
-				all->flag = ft_checkflag(&all->format[i + 1], 0);
-				all->str = func[all->flag](ap);
-				all->ret = ft_option(all, i);
-				while (format[i] && ft_checkflag_end(&format[i], 0) == -1)
-					i++;
-			}
-		}
-		else if (all->format[i] && ft_strlen(all->format) > i)
-		{
-			all->ret++;
-			ft_putchar(all->format[i]); 
-		}
-		i++;
-
-	}
-/*
-	i = 0;
-	cnt = 0;
-	if (!(option = (int*)malloc(sizeof(int) * 7)))
-		return (0);
-	while (i < 7)
-		option[i++] = 0;
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			if (format[i + 1] == '%')
-					i++;
-			else
-			{
-
-
-				option = ft_flags(&format[i + 1], option);
-				flag = ft_checkflag(&format[i + 1], 0);
-				if (flag == -1 && format[i + 1] == '\0')
-					return (0);
-				str = func[flag](ap);
-				if (option[4] == 1 || option[2] == 1 || option[3] == 1 || option[5] == 1)
-					cnt += ft_hashtag(format, option, i, str);
-				else if ((option[0] == 1 || option[1] == 1) && option[3] != 1)
-					cnt += ft_sign(&format[i + 1], option, i, str);
-				if (flag != 1)
-					free(str);
-				 while (format[i] && ft_checkflag_end(&format[i], 0) == -1)
-					i++;
-					i++;
-			
-			}
-		}
-		if (format[i] && ft_strlen(format) > i)
-		{
-			cnt++;
-			ft_putchar(format[i]);
-		}
-		i++;
-	}
-*/	return (all->ret);
-}
-
-int			ft_printf(const char *restrict format, ...)
-{
-	va_list ap;
-	int		cnt;
-
 	ft_func();
 	va_start(ap, format);
-	cnt = ft_par(format, ap);
+	cnt = ft_par(ap, all);
 	va_end(ap);
+	free(all->option);
+	free(all);
 	return (cnt);
 }

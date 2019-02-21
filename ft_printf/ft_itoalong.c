@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 10:48:30 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/24 10:48:32 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/02/12 15:45:36 by mascorpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char			*ft_itoalong(long n)
 	int		neg;
 	int		len;
 	char	*tab;
+	char	*tmp;
 
 	neg = 0;
 	if (n < 0)
@@ -56,6 +57,7 @@ char			*ft_itoalong(long n)
 	len = ft_len(n) + neg;
 	if (!(tab = (char*)malloc(sizeof(*tab) * len + 2)))
 		return (0);
+	tmp = tab;
 	ft_print(n, tab, neg, len);
 	return (tab);
 }

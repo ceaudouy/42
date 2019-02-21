@@ -14,18 +14,26 @@
 
 char		*ft_decimal(va_list ap)
 {
-	int	i;
+	int		i;
+	char	*str;
+	char	*tmp;
 
 	i = va_arg(ap, int);
-	return (ft_itoa(i));
+	if (!(tmp = ft_itoa(i)))
+		str = "0";
+	str = tmp;
+	free(tmp);
+	return (str);
 }
 
 char		*ft_longlong_d(va_list ap)
 {
-	long long nb;
+	long long	nb;
+	char		*str;
 
 	nb = va_arg(ap, long long);
-	return (ft_itoalonglong(nb));
+	str = ft_itoalonglong(nb);
+	return (str);
 }
 
 char		*ft_long_d(va_list ap)
@@ -34,21 +42,26 @@ char		*ft_long_d(va_list ap)
 	char	*str;
 
 	nb = va_arg(ap, long);
-	return (ft_itoalong(nb));
+	str = ft_itoalong(nb);
+	return (str);
 }
 
-char	*ft_short_d(va_list ap)
+char		*ft_short_d(va_list ap)
 {
-	short		i;
+	short	i;
+	char	*str;
 
 	i = va_arg(ap, int);
-	return (ft_itoa(i));
+	str = ft_itoa(i);
+	return (str);
 }
 
-char	*ft_char_d(va_list ap)
+char		*ft_char_d(va_list ap)
 {
-	char		i;
+	char	i;
+	char	*str;
 
 	i = (char)va_arg(ap, int);
-	return (ft_itoa(i));
+	str = ft_itoa(i);
+	return (str);
 }

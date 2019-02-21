@@ -1,0 +1,384 @@
+NEW:
+Name: Debian2
+Type: Linux
+Version: Debian (64-bit)
+Memory Size: 1024MB
+Create a virtual hard disk now
+VDI (VirtualBox Disk Image)
+Dynamically allocated
+folder: /Volumes/Storage/goinfre/ceaudouy/Debian2.vdi
+8.00GB
+********************************************************
+Langue: Francais
+Pays: France
+clavier: Etat-Unis
+System name: roger
+Domain: roger
+Root mdp: qwerty
+Name user: ceaudouy
+mdr user: qwerty
+
+Assiste - utiliser un disque entier
+Tout dans une seule partition
+Selection 1
+Supprimer la partition
+Select espace libre
+Creer partition
+4.2GB / Primaire / debut
+Fin du parametrage
+Appliquer les changements
+Oui
+
+Non
+France
+ftp.fr.debian.org
+Laisser vide / continuer
+Non
+
+****ESPACE POUR SELECTIONNER****
+Serveur wed
+Serveur SSH
+Utilitaire usuels du systeme
+
+Grub = oui
+disque de la vm
+
+******************************************
+
+en root:
+$ apt install sudo
+$ adduser ceaudouy sudo
+
+user: (su user/mdp)
+$ sudo apt install net-tools (ifconfig/ip)
+$ sudo apt install fail2ban (dos service)
+$ sudo apt install vim
+ip dhcp = $ ip route
+
+modifier dhcp:
+$ sudo nano /etc/network/interfaces
+#   Assigner une adresse IP statique pour ce serveur DHCP avec enp0s3 :
+auto enp0s3
+iface enp0s3 inet static
+address 10.12.1.134 (ip a > inet)
+netmask 255.255.255.252
+gateway 10.12.254.254
+
+# The primary network interface
+allow-hotplug enp0s3 > #allow-hotplug enp0s3
+iface enp0s3 inet dhcp > #iface enp0s3 inet dhcp
+appliquer :
+$ sudo ifdown enp0s3
+$ sudo ifup enp0s3
+
+verif:
+$ ip route
+
+Dans le Terminal de l'ordinateur :
+	$ cd ~/.ssh
+	$ ssh-keygen -t rsa (enter x 3)
+Dans la VM
+	verifier que ~/.ssh/authorized_keys existe, sinon le creer
+Dans le terminal de l'ordinateur
+	scp ~/.ssh/id_rsa.pub ceaudouy@10.12.1.108:/home/ceaudouy/.ssh/authorized_keys
+Relancer la VM
+
+modifier port ssh:
+$ sudo nano /etc/ssh/sshd_config
+#port 22 > port 42
+
+modifier acces SSH
+$ sudo nano /etc/ssh/sshd_config
+#pubkeyAuthentication yes > pubkeyAuthentication yes
+#PermitRootLogin prohibit-password > PermitRootLogin no
+#AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2 > AuthorizedKeysFile      .ssh/authorized_keys .ssh/authorized_keys2
+
+*****************************************************************************************
+
+firewall :
+
+##################################################################################################################
+-t filter : pour préciser la table (facultatif avec la table filter).											 #
+-A chain : ajouter une règle à la fin de la chaîne (OUTPUT, puis INPUT)											 #
+-p : pour indiquer le type de trames utilisé dans le paquet ([!] “all”, “tcp”, “udp”, “icmp”, ou un numéro).	 #
+–dport : port de destination.																					 #
+–sport : port source.																							 #
+-m module : Demande d'utiliser un module particulier.															 #
+conntrack : c'est un module de netfilter.																		 #
+–ctstate : liste des états conntrack.																			 #
+##################################################################################################################
+
+en root
+$ cd 
+$ mkdir Scripts
+$ cd Script
+$ touch firewall.sh
+
+dans firewall.sh:
+-----------------------------------------------------------------------------------------------------------------------------------
+#!/bin/sh
+
+### Basiques ##
+
+# On vide les règles déjà existantes
+iptables -t filter -F
+iptables -t filter -X
+
+# On refuse toutes les connexions
+iptables -t filter -P INPUT DROP
+iptables -t filter -P FORWARD DROP
+iptables -t filter -P OUTPUT DROP
+
+# On autorise les connexions déjà établie
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# On autorise le loop-back (localhost)
+iptables -t filter -A INPUT -i lo -j ACCEPT
+iptables -t filter -A OUTPUT -o lo -j ACCEPT
+
+# On autorise le ping
+iptables -t filter -A INPUT -p icmp -j ACCEPT
+iptables -t filter -A OUTPUT -p icmp -j ACCEPT
+
+# serveur DNS et Resolutions
+iptables -t filter -A OUTPUT -p tcp --dport 53 -j ACCEPT
+iptables -t filter -A OUTPUT -p udp --dport 53 -j ACCEPT
+iptables -t filter -A INPUT -p tcp --dport 53 -j ACCEPT
+iptables -t filter -A INPUT -p udp --dport 53 -j ACCEPT
+
+# SSH (à adapter suivant votre cas)
+iptables -t filter -A INPUT -p tcp --dport 42 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 42 -j ACCEPT
+
+# NTP (pour avoir un serveur à l'heure)
+iptables -t filter -A OUTPUT -p udp --dport 123 -j ACCEPT
+
+### HTTP/HTTPS ###
+iptables -t filter -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -t filter -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -t filter -A INPUT -p tcp --dport 8443 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 80 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 443 -j ACCEPT
+
+# Webmin 
+iptables -t filter -A INPUT -p tcp --dport 10000 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 10000 -j ACCEPT
+
+### FTP / FTP-DATA ###
+iptables -t filter -A INPUT -p tcp --dport 20 -j ACCEPT
+iptables -t filter -A INPUT -p tcp --dport 21 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 21 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 20 -j ACCEPT
+
+#SMTP#
+iptables -t filter -A INPUT -p tcp --dport 25 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 25 -j ACCEPT
+-----------------------------------------------------------------------------------------------------------------------------------
+
+rendre le script executable
+$ chmod +x firewall.sh
+$ sh firewall.sh
+$ iptables-save > /etc/firewall.conf
+
+dans /etc/network/if-up.d
+$ touch iptables
+
+dans iptables
+----------------------------------------------------
+#!/bin/sh
+iptables-restore < /etc/firewall.conf
+-----------------------------------------------------
+
+$ sudo chmod +x iptables
+$ sudo sh iptables
+
+*************************************************************************************************************
+
+DOS :
+
+$ sudo touch /etc/fail2ban/jail.local
+$ sudo vi /etc/fail2ban/jail.local
+
+dans jail.local
+------------------------------------------------------
+[sshd]
+
+enable = true
+port = 42
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+maxretry = 3
+bantime = 120
+
+[sshd-ddos]
+
+enable = true
+port = 42
+filter = sshd-ddos
+logpath = %(sshd_log)s
+backend = %(sshd_backend)s
+maxretry = 5
+bantime = 120
+------------------------------------------------------
+
+$ sudo service fail2ban restart
+
+**********************************************************************************************************************************
+
+protection contre les scans : 
+
+$ sudo apt install portsentry
+
+dans /etc/portsentry/portsentry.ignore.static
+ ---------------------------------------
+#ajouter les ip
+
+ 10.12.1.138 (ip de la vm)
+ 10.12.7.6 (ip de iterm)
+ ---------------------------------------
+
+ $ sudo service portsentry restart
+
+ dans /etc/default/portsentry
+----------------------------------------
+Remplacer
+TCP_MODE="tcp"
+UDP_MODE="udp"
+
+Par
+TCP_MODE="atcp"
+UDP_MODE="audp"
+----------------------------------------
+
+dans /etc/portsentry/portsentry.conf
+----------------------------------------
+##################
+# Ignore Options #
+##################
+...
+# 0 = Do not block UDP/TCP scans.
+# 1 = Block UDP/TCP scans.
+# 2 = Run external command only (KILL_RUN_CMD)
+ 
+ BLOCK_UDP="0" > BLOCK_UDP="1"
+ BLOCK_TCP="0" > BLOCK_TCP="1"
+
+#mettre tous les KILL_ROUTE en commentaire
+#sauf KILL_ROUTE="/sbin/iptables -I INPUT -s $TARGET$ -j DROP"
+-----------------------------------------
+
+$ sudo restart service portsentry restart
+***********************************************************************************************************************************
+
+identifier tous les services actif:
+$ sudo service --status-all
+
+$ mkdir Scripts
+$ touch Scripts/close_service.sh
+
+dans Scripts/close_service.sh
+-------------------------------------------
+#!/bin/bash
+sudo service dbus stop 2>/dev/null
+sudo service procps stop 2>/dev/null
+sudo service kmod stop 2>/dev/null
+sudo service portsentry restart
+-------------------------------------------
+
+
+ATTENTION, SI UTILISATION DE SUDO, POSSIBILITE DE CONFLIT
+Ne plus demander de mot de passe sudo pour add user	
+
+dans /etc/sudoers
+----------------------------------------------	
+Modifier
+	%sudo	ALL=(ALL:ALL) ALL
+Par 
+	%sudo	ALL=(ALL:ALL) NOPASSWD: ALL
+-----------------------------------------------
+
+$ sudo chmod +x /Scripts/close_service.sh
+$ crontab -e
+
+#(-e pour editer crontab)
+dans crontab
+------------------------------------------------
+@reboot sleep 20 && ~/Scripts/close_service.sh
+------------------------------------------------
+#(sleep 20 pour close les services 20 secondes apres le boot)
+
+************************************************************************************************************************************
+
+creer le fichier update_script.log
+$ sudo touch /var/log/update_script.log
+$ sudo chmod 777 /var/log/update_script.log
+
+dans le dossier ~/Scripts
+$ touch update_script.sh
+
+dans update_script.sh
+--------------------------------------------------
+#!/bin/bash
+sudo apt-get update > /var/log/update_script.log
+sudo apt-get -y upgrade >> /var/log/update_script.log
+--------------------------------------------------
+#-y pour eviter les messages d'erreur
+
+$ chmod +x update_script.sh
+$ crontab -e
+
+dans crontab
+--------------------------------------------------
+@reboot sleep 25 && ~/Script/update_upgrade.sh
+0 4 * * 1 ~/Script/update_upgrade.sh
+--------------------------------------------------
+
+**************************************************************************************************************************************
+
+gestion mail :
+
+$ sudo apt-get install postfix
+$ sudo apt install mailutils
+
+dans /etc/postfix/main.cf
+----------------------------------------
+inet_interface = all > = loopback-only
+----------------------------------------
+
+en root
+$ touch ~/Scripts/modif-fichier.sh
+ dans ~/Scripts/modif-fichier.sh
+ ----------------------------------------
+#!/bin/bash
+
+#Nom du fichier à surveiller
+NOM_FICHIER="/etc/crontab"
+# Date de la dernière modification du fichier ci-dessus
+DERNIERE_MODIF=$(date -r ${NOM_FICHIER} '+%d/%m/%Y %H:%M')
+# Adresse mail de l'administrateur ou de la personne à prévenir
+MAIL_ADMIN="root@roger.roger"
+# Date a laquelle le fichier à bien été modifié par vos soins
+DATE_MODIF="18/02/2019 16:07"
+# Test si les deux dates sont identiques
+if [ "${NOM_FICHIER}" != "${DATE_MODIF}" ]; then
+# Si différente, envoi du mail d'alerte
+CORPS_MESSAGE="Alerte, le fichier ${NOM_FICHIER} a été modifié le ${DERNIERE_MODIF}";
+echo "$CORPS_MESSAGE" | mail -s "Alerte surveillance modification de fichier" "${MAIL_ADMIN}";
+fi
+ ----------------------------------------
+
+#pensez a modifier DATE_MODIF a chaque modif du fichier crontab et executer modif-fichier.sh
+
+$ chmod 700 modif-fichier.sh
+$ sh modif-fichier.sh
+crontab -e
+
+dans crontab
+---------------------------------------------
+1 * * * * /root/modif-fichier.sh
+---------------------------------------------
+
+****************************************************************************************************************************************
+
+
