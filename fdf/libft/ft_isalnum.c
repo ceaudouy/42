@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 11:11:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/02/21 11:11:49 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/09 16:21:00 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/09 16:53:07 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-#include <mlx.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_struct
+int		ft_isalnum(int c)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-    char    **map;
-    int     fd;
-    int     x;
-    int     y;
-}               t_struct;
-void    put_pixel(t_struct *all);
-#endif
+	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
+}

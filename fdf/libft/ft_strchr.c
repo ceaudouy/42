@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 11:11:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/02/21 11:11:49 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/09 11:57:55 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/12 18:50:33 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-#include <mlx.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_struct
+char	*ft_strchr(const char *s, int c)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-    char    **map;
-    int     fd;
-    int     x;
-    int     y;
-}               t_struct;
-void    put_pixel(t_struct *all);
-#endif
+	int		i;
+	char	*rtn;
+	char	p;
+
+	p = (char)c;
+	rtn = (char*)s;
+	i = 0;
+	while (rtn[i])
+	{
+		if (rtn[i] == p)
+			return (&rtn[i]);
+		i++;
+	}
+	if (p == '\0')
+		return (&rtn[i]);
+	return (NULL);
+}

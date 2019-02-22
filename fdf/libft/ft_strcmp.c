@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 11:11:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/02/21 11:11:49 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/08 11:42:00 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/17 11:51:13 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-#include <mlx.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_struct
+int		ft_strcmp(const char *s1, const char *s2)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-    char    **map;
-    int     fd;
-    int     x;
-    int     y;
-}               t_struct;
-void    put_pixel(t_struct *all);
-#endif
+	int				i;
+	unsigned char	*c1;
+	unsigned char	*c2;
+
+	c1 = (unsigned char*)s1;
+	c2 = (unsigned char*)s2;
+	i = 0;
+	if (c1[i] == '\0' || c2[i] == '\0')
+		return (c1[i] - c2[i]);
+	while (c1[i] && c2[i])
+	{
+		if (c1[i] == c2[i])
+			i++;
+		else
+			return (c1[i] - c2[i]);
+	}
+	return (c1[i] - c2[i]);
+}

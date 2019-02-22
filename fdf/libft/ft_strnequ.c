@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 11:11:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/02/21 11:11:49 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/13 10:42:49 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/16 18:16:32 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-#include <mlx.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_struct
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-    char    **map;
-    int     fd;
-    int     x;
-    int     y;
-}               t_struct;
-void    put_pixel(t_struct *all);
-#endif
+	size_t		i;
+
+	if (s1 && s2)
+	{
+		i = 0;
+		while (s1[i] && s2[i] && i < n)
+		{
+			if (s1[i] == s2[i])
+				i++;
+			else
+				return (0);
+		}
+		if (i == n)
+			i--;
+		if (s1[i] == s2[i] || n == 0)
+			return (1);
+	}
+	return (0);
+}

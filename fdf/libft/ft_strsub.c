@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/21 11:11:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/02/21 11:11:49 by ceaudouy         ###   ########.fr       */
+/*   Created: 2018/11/13 11:01:29 by ceaudouy          #+#    #+#             */
+/*   Updated: 2018/11/13 16:21:28 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-#include <mlx.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <fcntl.h>
-
-typedef struct  s_struct
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-    void    *mlx_ptr;
-    void    *win_ptr;
-    char    **map;
-    int     fd;
-    int     x;
-    int     y;
-}               t_struct;
-void    put_pixel(t_struct *all);
-#endif
+	size_t	j;
+	char	*new;
+
+	if (s)
+	{
+		j = 0;
+		if (!(new = (char*)malloc(sizeof(*new) * len + 1)))
+			return (NULL);
+		while (j < len)
+		{
+			new[j] = s[start];
+			j++;
+			start++;
+		}
+		new[j] = '\0';
+		return (new);
+	}
+	return (0);
+}
