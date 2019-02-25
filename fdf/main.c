@@ -49,6 +49,7 @@ void    ft_exec(t_struct *all)
     all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, "42");
     mlx_key_hook(all->win_ptr, deal_key, (void*)0);
     ft_pos(all);
+    printf("map = %c", all->map[1][1]);
     put_pixel(all);
     ft_draw(all);
     mlx_loop(all->mlx_ptr);

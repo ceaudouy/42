@@ -15,15 +15,40 @@
 
 void    draw_vert(t_struct *all)
 {
+    size_t    k;
+    int    draw;
+    int    i;
+
+    i = 0;
+    while (i < all->y - 1 )
+    {
+        k = 1;
+        while (k < ft_strlen(all->map[i]))
+        {
+            if (all->pos[i][k - 1] == all->pos[i + 1][k - 1])
+            {
+                draw = all->pos[i][k];
+                while (draw < all->pos[i + 1][k])
+                {
+                    mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 0xFF0000);
+                    draw++;
+                }
+            }
+            k += 2;
+        }
+        i++;
+    }
+    /*
     int     k;
     int     draw;
+    int     i;
 
-    k = 0;
+    i = 0;
     while (k < all->size)
     {
         if (all->pos[k] == all->pos[k + 2])
         {
-            draw = all->pos[k + 1];
+            draw = all->pos[i][k + 1];
             while (draw < all->pos[k + 2])
             {
                 mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[k], draw, 0xFF0000);
@@ -31,27 +56,33 @@ void    draw_vert(t_struct *all)
             }
         }
         k += 2;
-    }
+    }*/
 }
 
 void    ft_draw(t_struct *all)
 {
-    int    k;
+    size_t    k;
     int    draw;
+    int    i;
 
-    k = 0;
-    while (k < all->size)
+    i = 0;
+    while (i < all->y)
     {
-        if (all->pos[k + 1] == all->pos[k + 3])
+        k = 0;
+        while (k < ft_strlen(all->map[i]))
         {
-            draw = all->pos[k];
-            while (draw < all->pos[k + 4])
+            if (all->pos[i][k + 1] == all->pos[i][k + 3])
             {
-                mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[k + 1], 0xFF0000);
-                draw++;
+                draw = all->pos[i][k];
+                while (draw < all->pos[i][k + 2])
+                {
+                    mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 0xFF0000);
+                    draw++;
+                }
             }
+            k += 2;
         }
-        k += 2;
+        i++;
     }    
     draw_vert(all);
 }

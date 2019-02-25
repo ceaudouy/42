@@ -39,41 +39,49 @@ void       ft_pos(t_struct *all)
     i = 0;
     y = 150;
     all->size = 0;
-    if (!(all->pos = malloc(sizeof(*all->pos) * (2048))))
+    if (!(all->pos = malloc(sizeof(*all->pos) * all->y + 1)))
         return;
     while (i < all->y)
     {
         size = ft_strlen(all->map[i]);
         j = 0;
         x = 150;
-        while (j < size)
+        if (!(all->pos[i] = malloc(sizeof(*all->pos[i]) * (ft_strlen(all->map[i])) + 1)))
+            return ;
+        while (j < size - 1)
         {
-            all->pos[all->size] = x;
-            all->pos[all->size + 1] = y;
-            j++;
-            all->size += 2;
-            x += (1500 / checksize(all)) / 2;
+            all->pos[i][j] = x;
+            all->pos[i][j + 1] = y;
+            j += 2;
+            x += (1000 / all->y) / 2;
         }
+        all->pos[i][j] = '\0';
         i++;
         y += (1000 / all->y) / 2;
     }
-
+    all->pos[i] = 0;
+    i = 0;
 } 
 
 void    put_pixel(t_struct *all)
 {
     int     i;
-    int     j;
+    size_t     j;
     int     size;
     int     x;
     int     y;
-    int     k;
+    size_t     k;
     
-    k = 0;
-    while (k < all->size)
+    i = 0;
+    while (i < all->y)
     {
-        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[k], all->pos[k + 1], 0xFF0000);
-        k += 2;
+        k = 0;
+        while (k < ft_strlen(all->map[i]))
+        {
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 0xFF0000);
+            k += 2;
+        }
+        i++;
     }
   /*  while (i < all->y)
     {
