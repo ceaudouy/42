@@ -24,8 +24,13 @@ typedef struct  s_struct
     void    *win_ptr;
     char    **map;
     int     fd;
+    int     *pos;
     int     x;
     int     y;
+    int     k;
+    int     size;
 }               t_struct;
 void    put_pixel(t_struct *all);
+void    ft_pos(t_struct *all);
+void    ft_draw(t_struct *all);
 #endif

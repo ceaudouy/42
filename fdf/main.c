@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int     deal_key(int key, void *param)
+int     deal_key(int key, t_struct *all)
 {
     if (key == 53)
         exit (1);
@@ -34,12 +34,24 @@ void    ft_map(t_struct *all)
     {
         tmp = ft_strjoin(*line, "\n");
         all->map[i] = tmp;
-        free(*line);
+       // free(*line);
         //free(tmp);
         i++;
         all->y++;
     }
-    free(line);
+    //free(line);
+}
+
+void    ft_exec(t_struct *all)
+{
+    ft_map(all);
+    all->mlx_ptr = mlx_init();
+    all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, "42");
+    mlx_key_hook(all->win_ptr, deal_key, (void*)0);
+    ft_pos(all);
+    put_pixel(all);
+    ft_draw(all);
+    mlx_loop(all->mlx_ptr);
 }
 
 int     main(int ac, char **av)
@@ -55,12 +67,7 @@ int     main(int ac, char **av)
         ft_putstr("error fd\n");
         return (0);
     }
-    ft_map(all);
-    all->mlx_ptr = mlx_init();
-    all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, "42");
-    mlx_key_hook(all->win_ptr, deal_key, (void*)0);
-    put_pixel(all);
-    mlx_loop(all->mlx_ptr);
+    ft_exec(all);
     close(all->fd);
     free(all);
     return (0);
