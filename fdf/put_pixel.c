@@ -32,35 +32,45 @@ void       ft_pos(t_struct *all)
 {
     int     i;
     int     j;
-    int     size;
+    int     k;
     int     x;
     int     y;
 
     i = 0;
     y = 150;
-    all->size = 0;
-    if (!(all->pos = malloc(sizeof(*all->pos) * all->y + 1)))
+    if (!(all->pos = (int**)malloc(sizeof(*all->pos) * all->y)))
         return;
     while (i < all->y)
     {
-        size = ft_strlen(all->map[i]);
         j = 0;
+        k = 0;
         x = 150;
-        if (!(all->pos[i] = malloc(sizeof(*all->pos[i]) * (ft_strlen(all->map[i])) + 1)))
+        if (!(all->pos[i] = (int*)malloc(sizeof(*all->pos[i]) * all->size[i] * 2)))
             return ;
-        while (j < size - 1)
+        while (j < all->size[i] * 2)
         {
-            all->pos[i][j] = x;
-            all->pos[i][j + 1] = y;
+            if (all->alt[i][k] > 0)
+            {
+                all->pos[i][j] = x + (1000 / (all->y)) / (2 + all->alt[i][k]);
+                all->pos[i][j + 1] = y  + (1000 / (all->y)) / (2 + all->alt[i][k]);     
+            }
+            else if (all->alt[i][k] < 0)
+            {
+                all->pos[i][j] = x - (1000 / (all->y)) / (2 - all->alt[i][k]);
+                all->pos[i][j + 1] = y  - (1000 / (all->y)) / (2 - all->alt[i][k]);     
+            }
+            else
+            {
+                all->pos[i][j] = x;
+                all->pos[i][j + 1] = y;
+            }
             j += 2;
+            k++;
             x += (1000 / all->y) / 2;
         }
-        all->pos[i][j] = '\0';
         i++;
         y += (1000 / all->y) / 2;
     }
-    all->pos[i] = 0;
-    i = 0;
 } 
 
 void    put_pixel(t_struct *all)
@@ -76,23 +86,14 @@ void    put_pixel(t_struct *all)
     while (i < all->y)
     {
         k = 0;
-        while (k < ft_strlen(all->map[i]))
+        while (k < all->size[i] * 2)
         {
-            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 0xFF0000);
+            if (all->alt[i][k] > 0)
+                mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 687460);
+            else
+                mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 0xFF0000);
             k += 2;
         }
         i++;
     }
-  /*  while (i < all->y)
-    {
-        size = ft_strlen(all->map[i]);
-        j = 0;
-        while (j < size)
-        {
-            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[k], all->pos[k + 1], 0xFF0000);
-            j += 2;
-            k += 2;
-        }
-        i++;
-    }*/
 }

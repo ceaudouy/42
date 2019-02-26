@@ -25,13 +25,14 @@ typedef struct  s_struct
     char    **map;
     int     fd;
     int     **pos;
+    int     **alt;
     int     x;
     int     y;
     int     k;
-    int     size;
+    int     *size;
 }               t_struct;
 void    put_pixel(t_struct *all);
 void    ft_pos(t_struct *all);
 void    ft_draw(t_struct *all);
-void    ft_relief(t_struct *all);
+void    ft_alt(t_struct *all);
 #endif
