@@ -51,13 +51,13 @@ void       ft_pos(t_struct *all)
         {
             if (all->alt[i][k] > 0)
             {
-                all->pos[i][j] = x + (1000 / (all->y)) / (2 + all->alt[i][k]);
-                all->pos[i][j + 1] = y  + (1000 / (all->y)) / (2 + all->alt[i][k]);     
+                all->pos[i][j] = x + (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);
+                all->pos[i][j + 1] = y  + (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);     
             }
             else if (all->alt[i][k] < 0)
             {
-                all->pos[i][j] = x - (1000 / (all->y)) / (2 - all->alt[i][k]);
-                all->pos[i][j + 1] = y  - (1000 / (all->y)) / (2 - all->alt[i][k]);     
+                all->pos[i][j] = x - (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);
+                all->pos[i][j + 1] = y  - (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);     
             }
             else
             {
@@ -76,11 +76,11 @@ void       ft_pos(t_struct *all)
 void    put_pixel(t_struct *all)
 {
     int     i;
-    size_t     j;
+    size_t  j;
     int     size;
     int     x;
     int     y;
-    size_t     k;
+    size_t  k;
     
     i = 0;
     while (i < all->y)

@@ -27,7 +27,7 @@ void    draw_vert(t_struct *all)
         k = 1;
         while (k < all->size[i] * 2)
         {
-            if (i < all->y - 1 && all->pos[i][k - 1] == all->pos[i + 1][k - 1])
+            if (i < all->y - 1 && (all->pos[i][k - 1] == all->pos[i + 1][k - 1]))
             {
                 draw = all->pos[i][k];
                 while (draw < all->pos[i + 1][k])
@@ -41,6 +41,10 @@ void    draw_vert(t_struct *all)
                     draw++;
                 }
             }
+            else
+            {
+                ft_bresenham_vert(all, i, k);
+            }
             j++;
             k += 2;
         }
@@ -53,7 +57,7 @@ void    ft_draw(t_struct *all)
     size_t    k;
     int    draw;
     int    i;
-    int     j;
+    int    j;
 
     i = 0;
     while (i < all->y)
@@ -76,10 +80,16 @@ void    ft_draw(t_struct *all)
                     draw++;
                 }
             }
+            else
+            {
+                ft_bresenham(all, i, k);
+            }
+            
             j++;
             k += 2;
         }
         i++;
-    }    
+    }
     draw_vert(all);
+    
 }

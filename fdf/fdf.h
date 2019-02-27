@@ -30,9 +30,18 @@ typedef struct  s_struct
     int     y;
     int     k;
     int     *size;
+    int     dx;
+    int     dy;
+    int     x1;
+    int     x2;
+    int     y1;
+    int     y2;
 }               t_struct;
 void    put_pixel(t_struct *all);
 void    ft_pos(t_struct *all);
 void    ft_draw(t_struct *all);
 void    ft_alt(t_struct *all);
+void    ft_bresenham(t_struct *all, int i, int j);
+void    ft_bresenham_vert(t_struct *all, int i, int j);
+
 #endif
