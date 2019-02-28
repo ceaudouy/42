@@ -36,6 +36,7 @@ typedef struct  s_struct
     int     x2;
     int     y1;
     int     y2;
+    int     signe;
 }               t_struct;
 void    put_pixel(t_struct *all);
 void    ft_pos(t_struct *all);

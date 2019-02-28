@@ -16,6 +16,11 @@ int     deal_key(int key, t_struct *all)
 {
     if (key == 53)
         exit (1);
+   // if (key == 35)
+    //{
+        
+    //}
+    ft_putnbr(key);
     return (0);
 }
 
@@ -42,16 +47,16 @@ void    ft_map(t_struct *all)
     //free(line);
 }
 
-void    ft_exec(t_struct *all)
+void    ft_exec(t_struct *all, char **av)
 {
     ft_map(all);
-    all->mlx_ptr = mlx_init();
-    all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, "42");
-    mlx_key_hook(all->win_ptr, deal_key, (void*)0);
     ft_alt(all);
+    all->mlx_ptr = mlx_init();
+    all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, av[1]);
+    mlx_key_hook(all->win_ptr, deal_key, (void*)0);
     ft_pos(all);
-   // put_pixel(all);
     ft_draw(all);
+    //put_pixel(all);
     mlx_loop(all->mlx_ptr);
 }
 
@@ -68,7 +73,7 @@ int     main(int ac, char **av)
         ft_putstr("error fd\n");
         return (0);
     }
-    ft_exec(all);
+    ft_exec(all, av);
     close(all->fd);
     free(all);
     return (0);

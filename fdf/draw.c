@@ -33,11 +33,11 @@ void    draw_vert(t_struct *all)
                 while (draw < all->pos[i + 1][k])
                 {
                     if (all->alt[i][j] > 0)
-                         mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 687460);
+                         mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 16385289);
                     else if (all->alt[i][j] < 0)
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k + 1], draw, 65280);
+                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k + 1], draw, 4851194);
                     else
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 0xFF0000);
+                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 16777215);
                     draw++;
                 }
             }
@@ -72,11 +72,11 @@ void    ft_draw(t_struct *all)
                 while (draw < all->pos[i][k + 2])
                 {
                     if (all->alt[i][j] > 0)
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 687460);
+                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 16385289);
                     else if (all->alt[i][j] < 0)
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 65280);
+                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 4851194);
                     else
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 0xFF0000);
+                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 16777215);
                     draw++;
                 }
             }

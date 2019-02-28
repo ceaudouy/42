@@ -49,22 +49,22 @@ void       ft_pos(t_struct *all)
             return ;
         while (j < all->size[i] * 2)
         {
-            if (all->alt[i][k] > 0)
+           // if (all->alt[i][k] != 0)
+            //{
+                all->pos[i][j] = x + 0.5 * all->alt[i][k];//x + (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k];
+                all->pos[i][j + 1] = y + 0.5 / 2 * all->alt[i][k];//y  + (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k];     
+            //}
+           /* else if (all->alt[i][k] < 0)
             {
-                all->pos[i][j] = x + (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);
-                all->pos[i][j + 1] = y  + (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);     
-            }
-            else if (all->alt[i][k] < 0)
-            {
-                all->pos[i][j] = x - (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);
-                all->pos[i][j + 1] = y  - (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k]);     
+              // all->pos[i][j] = x - (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k];
+               all->pos[i][j + 1] = y  - (((1000 / (all->y)) / 2) / 2);// + all->alt[i][k];     
             }
             else
             {
                 all->pos[i][j] = x;
                 all->pos[i][j + 1] = y;
             }
-            j += 2;
+            */j += 2;
             k++;
             x += (1000 / all->y) / 2;
         }
@@ -76,10 +76,6 @@ void       ft_pos(t_struct *all)
 void    put_pixel(t_struct *all)
 {
     int     i;
-    size_t  j;
-    int     size;
-    int     x;
-    int     y;
     size_t  k;
     
     i = 0;
@@ -88,10 +84,7 @@ void    put_pixel(t_struct *all)
         k = 0;
         while (k < all->size[i] * 2)
         {
-            if (all->alt[i][k] > 0)
-                mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 687460);
-            else
-                mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 0xFF0000);
+                mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k], all->pos[i][k + 1], 16516059);
             k += 2;
         }
         i++;

@@ -42,14 +42,13 @@ void    ft_tracerpixel_horup(t_struct *all, float e, int i, int j)
     }
 }
 
-
 void    ft_bresenham(t_struct *all, int i, int j)
 {
     float   e;
 
     all->x1 = all->pos[i][j];
-    all->x2 = all->pos[i][j + 2];
     all->y1 = all->pos[i][j + 1];
+    all->x2 = all->pos[i][j + 2];
     all->y2 = all->pos[i][j + 3];
     e = all->pos[i][j + 2] - all->pos[i][j];
     all->dx = e * 2;
