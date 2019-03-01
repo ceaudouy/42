@@ -42,7 +42,8 @@ void    put_pixel(t_struct *all);
 void    ft_pos(t_struct *all);
 void    ft_draw(t_struct *all);
 void    ft_alt(t_struct *all);
-void    ft_bresenham(t_struct *all, int i, int j);
-void    ft_bresenham_vert(t_struct *all, int i, int j);
+void    ft_bresenham(t_struct *all, int i, int j, int k);
+void    ft_bresenham_vert(t_struct *all, int i, int j, int k);
+void    isometrique(t_struct *all);
 
 #endif

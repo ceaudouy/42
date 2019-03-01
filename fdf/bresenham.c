@@ -12,12 +12,17 @@
 
 #include "fdf.h"
 
-void    ft_tracerpixel_hordown(t_struct *all, float e, int i, int j)
+void    ft_tracerpixel_hordown(t_struct *all, float e, int i, int j, int k)
 {
    
     while (all->x1 < all->x2)
     {
-        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16754176);
+        if (all->alt[i][k] > 0)
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
+        else if (all->alt[i][k] < 0)
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
+        else
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
         all->x1++;
         if ((e = e - all->dy) <= 0)
         {
@@ -27,14 +32,19 @@ void    ft_tracerpixel_hordown(t_struct *all, float e, int i, int j)
     }
 }
 
-void    ft_tracerpixel_horup(t_struct *all, float e, int i, int j)
+void    ft_tracerpixel_horup(t_struct *all, float e, int i, int j, int k)
 {
    
     while (all->x1 < all->x2)
     {
-        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16754176);
+        if (all->alt[i][k] > 0)
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
+        else if (all->alt[i][k] < 0)
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
+        else
+            mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
         all->x1++;
-        if ((e = e - all->dy) >= 0)
+        if ((e = e + all->dy) <= 0)
         {
             all->y1--;
             e += all->dx;
@@ -42,7 +52,7 @@ void    ft_tracerpixel_horup(t_struct *all, float e, int i, int j)
     }
 }
 
-void    ft_bresenham(t_struct *all, int i, int j)
+void    ft_bresenham(t_struct *all, int i, int j, int k)
 {
     float   e;
 
@@ -53,8 +63,8 @@ void    ft_bresenham(t_struct *all, int i, int j)
     e = all->pos[i][j + 2] - all->pos[i][j];
     all->dx = e * 2;
     all->dy = (all->pos[i][j + 3] - all->pos[i][j + 1]) * 2;
-    if (all->y1 < all->y2)
-        ft_tracerpixel_hordown(all, e, i, j); 
-    if (all->y1 > all->y2)
-        ft_tracerpixel_horup(all, e, i, j);
+    if (all->y1 < all->y2 && all->x1 < all->x2)
+        ft_tracerpixel_hordown(all, e, i, j, k); 
+    else if (all->y1 > all->y2 && all->x1 < all->x2)
+        ft_tracerpixel_horup(all, e, i, j, k);
 }

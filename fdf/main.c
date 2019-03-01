@@ -39,7 +39,7 @@ void    ft_map(t_struct *all)
     {
         tmp = ft_strjoin(*line, "\n");
         all->map[i] = tmp;
-       // free(*line);
+        //free(*line);
         //free(tmp);
         i++;
         all->y++;
@@ -55,6 +55,7 @@ void    ft_exec(t_struct *all, char **av)
     all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, av[1]);
     mlx_key_hook(all->win_ptr, deal_key, (void*)0);
     ft_pos(all);
+    //isometrique(all);
     ft_draw(all);
     //put_pixel(all);
     mlx_loop(all->mlx_ptr);

@@ -43,7 +43,7 @@ void    draw_vert(t_struct *all)
             }
             else
             {
-                ft_bresenham_vert(all, i, k);
+                ft_bresenham_vert(all, i, k, j);
             }
             j++;
             k += 2;
@@ -82,7 +82,7 @@ void    ft_draw(t_struct *all)
             }
             else
             {
-                ft_bresenham(all, i, k);
+                ft_bresenham(all, i, k, j);
             }
             
             j++;
