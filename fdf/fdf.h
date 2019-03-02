@@ -45,5 +45,12 @@ void    ft_alt(t_struct *all);
 void    ft_bresenham(t_struct *all, int i, int j, int k);
 void    ft_bresenham_vert(t_struct *all, int i, int j, int k);
 void    isometrique(t_struct *all);
+void    ft_octant4(t_struct *all, float e, int k, int i);
+void    ft_octant3(t_struct *all, float e, int k, int i);
+void    ft_octant6(t_struct *all, float e, int k, int i);
+void    ft_octant5(t_struct *all, float e, int k, int i);
+void    ft_octant_horleft(t_struct *all, int i, int k);
+void    ft_octant_vert(t_struct *all, int i, int k);
+void    ft_octant_vert2(t_struct *all, int i, int k);
 
 #endif

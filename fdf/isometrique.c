@@ -34,8 +34,8 @@ void    isometrique(t_struct *all)
             return ;
         while (j < all->size[i] * 2)
         {
-                all->pos[i][j] = (0.5 * x) - (0.5 * y);
-                all->pos[i][j + 1] = all->alt[i][k] + ((0.5 / 2) * x) + ((0.5 / 2) * y);
+            all->pos[i][j] = 0.5 * x - 0.5 * y;
+            all->pos[i][j + 1] = (-all->alt[i][k] * 2) + 0.5 / 2 * x + 0.7 / 2 * y;
             j += 2;
             k++;
             x += (1000 / all->y) / 1.2;

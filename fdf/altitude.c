@@ -31,10 +31,12 @@ void    ft_alt(t_struct *all)
             return ;
         while (j < ft_strlen(all->map[i]))
         {
+            while (all->map[i][j] && all->map[i][j] == ' ')
+                j++;
             all->alt[i][k++] = ft_atoi(&all->map[i][j++]);
             while (all->map[i][j] && all->map[i][j] != ' ')
                 j++;
-            j++;
+            
         }
         all->size[i] = k; 
         i++;

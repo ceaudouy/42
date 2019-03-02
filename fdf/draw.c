@@ -19,34 +19,22 @@ void    draw_vert(t_struct *all)
     int    draw;
     int    i;
     int     j;
-
     i = 0;
     while (i < all->y - 1)
     {
-     j = 0;
-        k = 1;
+        k = 0;
+        j = 0;
         while (k < all->size[i] * 2)
         {
-            if (i < all->y - 1 && (all->pos[i][k - 1] == all->pos[i + 1][k - 1]))
-            {
-                draw = all->pos[i][k];
-                while (draw < all->pos[i + 1][k])
-                {
-                    if (all->alt[i][j] > 0)
-                         mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 16385289);
-                    else if (all->alt[i][j] < 0)
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k + 1], draw, 4851194);
-                    else
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->pos[i][k - 1], draw, 16777215);
-                    draw++;
-                }
-            }
-            else
-            {
-                ft_bresenham_vert(all, i, k, j);
-            }
-            j++;
+            all->x1 = all->pos[i][k];
+            all->y1 = all->pos[i][k + 1];
+            all->x2 = all->pos[i + 1][k];
+            all->y2 = all->pos[i + 1][k + 1];
+            all->dx = all->x2 - all->x1;
+            all->dy = all->y2 - all->y1;
+            ft_bresenham(all, i, k, j);
             k += 2;
+            j++;            
         }
         i++;
     }
@@ -54,6 +42,8 @@ void    draw_vert(t_struct *all)
 
 void    ft_draw(t_struct *all)
 {
+
+    
     size_t    k;
     int    draw;
     int    i;
@@ -66,30 +56,17 @@ void    ft_draw(t_struct *all)
         j = 0;
         while (k < all->size[i] * 2 - 2)
         {
-            if (all->pos[i][k + 1] == all->pos[i][k + 3])
-            {
-                draw = all->pos[i][k];
-                while (draw < all->pos[i][k + 2])
-                {
-                    if (all->alt[i][j] > 0)
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 16385289);
-                    else if (all->alt[i][j] < 0)
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 4851194);
-                    else
-                        mlx_pixel_put(all->mlx_ptr, all->win_ptr, draw, all->pos[i][k + 1], 16777215);
-                    draw++;
-                }
-            }
-            else
-            {
-                ft_bresenham(all, i, k, j);
-            }
-            
-            j++;
+            all->x1 = all->pos[i][k];
+            all->y1 = all->pos[i][k + 1];
+            all->x2 = all->pos[i][k + 2];
+            all->y2 = all->pos[i][k + 3];
+            all->dx = all->x2 - all->x1;
+            all->dy = all->y2 - all->y1;
+            ft_bresenham(all, i, k, j);
             k += 2;
+            j++;            
         }
         i++;
     }
     draw_vert(all);
-    
 }
