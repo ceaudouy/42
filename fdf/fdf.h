@@ -13,15 +13,17 @@
 #ifndef FDF_H
 # define FDF_H
 
-#include <mlx.h>
-#include "libft/libft.h"
-#include "libft/get_next_line.h"
-#include <fcntl.h>
+# include <mlx.h>
+# include "libft/libft.h"
+# include "libft/get_next_line.h"
+# include <fcntl.h>
+# include <math.h>
 
 typedef struct  s_struct
 {
     void    *mlx_ptr;
     void    *win_ptr;
+    void    *img_ptr;
     char    **map;
     int     fd;
     int     **pos;
@@ -36,7 +38,6 @@ typedef struct  s_struct
     int     x2;
     int     y1;
     int     y2;
-    int     signe;
 }               t_struct;
 void    put_pixel(t_struct *all);
 void    ft_pos(t_struct *all);
@@ -52,5 +53,6 @@ void    ft_octant5(t_struct *all, float e, int k, int i);
 void    ft_octant_horleft(t_struct *all, int i, int k);
 void    ft_octant_vert(t_struct *all, int i, int k);
 void    ft_octant_vert2(t_struct *all, int i, int k);
-
+void    free_pos(t_struct *all);
+void    free_tab(t_struct *all);
 #endif

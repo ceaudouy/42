@@ -49,8 +49,8 @@ void       ft_pos(t_struct *all)
             return ;
         while (j < all->size[i] * 2)
         {
-                all->pos[i][j] = x + 0.5 * all->alt[i][k];
-                all->pos[i][j + 1] = y + (0.5 / 2) * -all->alt[i][k];
+                all->pos[i][j] = x + 0.5 /** -all->alt[i][k]*/;
+                all->pos[i][j + 1] = y + (0.5 / 2) /* -all->alt[i][k]*/;
             j += 2;
             k++;
             x += (1000 / all->y) / 2;

@@ -12,24 +12,13 @@
 
 #include "fdf.h"
 
-int     deal_key(int key, t_struct *all)
-{
-    if (key == 53)
-        exit (1);
-   // if (key == 35)
-    //{
-        
-    //}
-    ft_putnbr(key);
-    return (0);
-}
-
 void    ft_map(t_struct *all)
 {
     char    **line;
     char    *tmp;
     int     i;
 
+    all->y = 0;
     i = 0;
     if (!(line = (char**)malloc(sizeof(*line) * 1)))
         return;
@@ -39,25 +28,48 @@ void    ft_map(t_struct *all)
     {
         tmp = ft_strjoin(*line, "\n");
         all->map[i] = tmp;
-        //free(*line);
-        //free(tmp);
+        free(*line);
         i++;
         all->y++;
     }
-    //free(line);
+    free(line);
+}
+
+int     deal_key(int key, t_struct *all)
+{
+    int i;
+    int j;
+
+    i = 0;
+    if (key == 53)
+        exit (1);
+    if (key == 18)
+    {
+        free_pos(all);
+        mlx_clear_window(all->mlx_ptr, all->win_ptr);
+        ft_pos(all);
+        ft_draw(all);
+    }
+    if (key == 19)
+    {
+        free_pos(all);
+        mlx_clear_window(all->mlx_ptr, all->win_ptr);
+        isometrique(all);
+        ft_draw(all);
+    }
+    ft_putnbr(key);
+    return (0);
 }
 
 void    ft_exec(t_struct *all, char **av)
 {
     ft_map(all);
     ft_alt(all);
+    ft_pos(all);
     all->mlx_ptr = mlx_init();
     all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, av[1]);
-    mlx_key_hook(all->win_ptr, deal_key, (void*)0);
-    //ft_pos(all);
-    isometrique(all);
-    ft_draw(all);
-    //put_pixel(all);
+    all->img_ptr = mlx_new_image(all->mlx_ptr, all->size[0], all->y);
+    mlx_key_hook(all->win_ptr, deal_key, all);
     mlx_loop(all->mlx_ptr);
 }
 
@@ -67,7 +79,6 @@ int     main(int ac, char **av)
 
     if (!(all = malloc(sizeof(t_struct) * 1)))
         return (0);
-    all->y = 0;
     all->fd = open(av[1], O_RDONLY);
     if (all->fd < 0)
     {
