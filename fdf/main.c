@@ -68,7 +68,7 @@ void    ft_exec(t_struct *all, char **av)
     ft_pos(all);
     all->mlx_ptr = mlx_init();
     all->win_ptr = mlx_new_window(all->mlx_ptr, 1500, 1000, av[1]);
-    all->img_ptr = mlx_new_image(all->mlx_ptr, all->size[0], all->y);
+    //all->img_ptr = mlx_new_image(all->mlx_ptr, all->size[0], all->y);
     mlx_key_hook(all->win_ptr, deal_key, all);
     mlx_loop(all->mlx_ptr);
 }
