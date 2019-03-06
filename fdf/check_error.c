@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mascorpi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:17:55 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/07 14:15:22 by mascorpi         ###   ########.fr       */
+/*   Created: 2019/03/06 11:07:19 by mascorpi          #+#    #+#             */
+/*   Updated: 2019/03/06 11:09:03 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-size_t		ft_strlen(const char *str)
+int		check_error(char *str)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
-	if (str)
+	while (str[i])
 	{
-		while (str[i])
-		{
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '-' || str[i] == ' '
+				|| str[i] == '\n')
 			i++;
+		else
+		{
+			ft_putstr("WRONG FILE\n");
+			exit(1);
 		}
-		return (i);
 	}
-	else
-		return (0);
+	return (0);
 }

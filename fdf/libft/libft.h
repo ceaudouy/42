@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 16:40:34 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/28 12:24:44 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/28 16:57:01 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,6 @@ void				ft_swap(int *a, int *b);
 void				ft_sort_params(int ac, char **av);
 void				ft_print_params(char **av);
 char				*ft_strndup2(char *str, int end);
+int					ft_sqrt(int nb);
+
 #endif

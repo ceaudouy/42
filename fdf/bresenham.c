@@ -6,13 +6,13 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 13:41:42 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/03/02 14:52:58 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/03/05 18:26:18 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    ft_octant1(t_struct *all, float e, int k, int i)
+void	ft_octant1(t_struct *all, float e, int k, int i)
 {
 	e = all->dx;
 	all->dx *= 2;
@@ -20,11 +20,11 @@ void    ft_octant1(t_struct *all, float e, int k, int i)
 	while (all->x1 < all->x2)
 	{
 		if (all->alt[i][k] > 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, RED);
 		else if (all->alt[i][k] < 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, BLU);
 		else
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, WHI);
 		all->x1++;
 		e -= all->dy;
 		if (e <= 0)
@@ -35,7 +35,7 @@ void    ft_octant1(t_struct *all, float e, int k, int i)
 	}
 }
 
-void    ft_octant8(t_struct *all, float e, int k, int i)
+void	ft_octant8(t_struct *all, float e, int k, int i)
 {
 	e = all->dx;
 	all->dx *= 2;
@@ -43,11 +43,11 @@ void    ft_octant8(t_struct *all, float e, int k, int i)
 	while (all->x1 < all->x2)
 	{
 		if (all->alt[i][k] > 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, RED);
 		else if (all->alt[i][k] < 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, BLU);
 		else
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, WHI);
 		all->x1++;
 		e += all->dy;
 		if (e <= 0)
@@ -58,7 +58,7 @@ void    ft_octant8(t_struct *all, float e, int k, int i)
 	}
 }
 
-void    ft_octant2(t_struct *all, float e, int k, int i)
+void	ft_octant2(t_struct *all, float e, int k, int i)
 {
 	e = all->dy;
 	all->dy *= 2;
@@ -66,11 +66,11 @@ void    ft_octant2(t_struct *all, float e, int k, int i)
 	while (all->y1 < all->y2)
 	{
 		if (all->alt[i][k] > 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, RED);
 		else if (all->alt[i][k] < 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, BLU);
 		else
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, WHI);
 		all->y1++;
 		e -= all->dx;
 		if (e <= 0)
@@ -81,7 +81,7 @@ void    ft_octant2(t_struct *all, float e, int k, int i)
 	}
 }
 
-void    ft_octant7(t_struct *all, float e, int k, int i)
+void	ft_octant7(t_struct *all, float e, int k, int i)
 {
 	e = all->dy;
 	all->dy *= 2;
@@ -89,11 +89,11 @@ void    ft_octant7(t_struct *all, float e, int k, int i)
 	while (all->y1 > all->y2)
 	{
 		if (all->alt[i][k] > 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, RED);
 		else if (all->alt[i][k] < 0)
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, BLU);
 		else
-			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
+			mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, WHI);
 		all->y1--;
 		e += all->dx;
 		if (e > 0)
@@ -104,63 +104,31 @@ void    ft_octant7(t_struct *all, float e, int k, int i)
 	}
 }
 
-void    ft_bresenham(t_struct *all, int i, int j, int k)
+void	ft_bresenham(t_struct *all, int i, int k)
 {
-	float   e;
+	float	e;
+
+	e = 0.0;
+	all->dx = all->x2 - all->x1;
+	all->dy = all->y2 - all->y1;
 	if (all->dx > 0)
 	{
 		if (all->dy > 0)
 		{
 			if (all->dx >= all->dy)
-				ft_octant1(all, e, k, i); 
+				ft_octant1(all, e, k, i);
 			else
-				ft_octant2(all, e, k, i);    
+				ft_octant2(all, e, k, i);
 		}
 		else if (all->dy < 0 && all->dx > 0)
 		{
 			if (all->dx >= -all->dy)
 				ft_octant8(all, e, k, i);
 			else
-				ft_octant7(all, e, k, i);        
+				ft_octant7(all, e, k, i);
 		}
 		if (all->dy == 0 && all->dx > 0)
-		{
-			while (all->x1 < all->x2)
-			{
-				if (all->alt[i][k] > 0)
-					mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16385289);
-				else if (all->alt[i][k] < 0)
-					mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 4851194);
-				else
-					mlx_pixel_put(all->mlx_ptr, all->win_ptr, all->x1, all->y1, 16777215);
-				all->x1++;
-			}
-		}
+			ft_octant_horright(all, i, k);
 	}
-	else if (all->dx < 0)
-	{
-		if (all->dy > 0)
-		{
-			if (-all->dx >= all->dy)
-				ft_octant4(all, e, k, i);
-			else
-				ft_octant3(all, e, k, i);
-		}
-		if (all->dy < 0 && all->dx < 0)
-		{
-			if (all->dx <= all->dy)
-				ft_octant5(all, e, k, i);
-			else
-				ft_octant6(all, e, k, i);        
-		}
-		if (all->dy == 0 && all->dx < 0)
-			ft_octant_horleft(all, i, k);
-	}
-	if (all->dx == 0)
-	{
-		if (all->dy > 0)
-			ft_octant_vert(all, i, k);
-	}
-	if (all->dy < 0 && all->dx == 0)
-ft_octant_vert2(all, i, k);
+	ft_bresenham2(all, i, k, e);
 }

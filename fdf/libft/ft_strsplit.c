@@ -6,12 +6,11 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 13:02:01 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/16 14:27:22 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/03/06 11:40:04 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int		ft_words(char const *s, char c, int len)
 {

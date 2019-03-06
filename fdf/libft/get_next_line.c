@@ -6,12 +6,12 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 10:31:27 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/24 14:58:23 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2018/12/06 18:21:32 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+
 static int		ft_print(int ret, int fd, char **str, char **line)
 {
 	int		i;
@@ -45,7 +45,7 @@ int				get_next_line(const int fd, char **line)
 	static char *str[255];
 	char		*tmp;
 	int			ret;
-	
+
 	if (fd < 0 || !line)
 		return (-1);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
