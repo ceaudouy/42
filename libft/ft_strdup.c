@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:26:46 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/19 11:52:39 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/01/09 15:17:11 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *str)
 	while (str[i])
 		i++;
 	if (!(new = (char*)malloc(sizeof(*str) * (i + 1))))
-		return (0);
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:17:55 by ceaudouy          #+#    #+#             */
-/*   Updated: 2018/11/17 12:57:46 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/01/07 14:15:22 by mascorpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ size_t		ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i])
+	if (str)
 	{
-		i++;
+		while (str[i])
+		{
+			i++;
+		}
+		return (i);
 	}
-	return (i);
+	else
+		return (0);
 }
