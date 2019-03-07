@@ -6,7 +6,7 @@
 /*   By: ceaudouy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 12:17:59 by ceaudouy          #+#    #+#             */
-/*   Updated: 2019/01/10 17:00:09 by ceaudouy         ###   ########.fr       */
+/*   Updated: 2019/03/04 13:09:14 by ceaudouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static char			**ft_read(int fd, char **tab)
 		if (!(tab[i] = ft_strdup(buf)))
 			return (ft_free_leaks(buf, tab));
 		ft_bzero(buf, 21);
-		if (ft_checkerror(tab[i]) == 1 || ft_check_tetri(tab[i]) == 1 ||
-				i >= 27)
+		if (ft_checkerror(tab[i]) == 1 || ft_check_tetri(tab[i]) == 1 
+				|| i >= 27)
 			return (ft_free_leaks(buf, tab));
 		i++;
 	}
