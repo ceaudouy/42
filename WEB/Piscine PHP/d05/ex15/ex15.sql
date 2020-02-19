@@ -1,0 +1,1 @@
+SELECT REVERSE(SUBSTRING(phone_number, 2)) AS rebmunenohp  from distrib where phone_number like "05%";

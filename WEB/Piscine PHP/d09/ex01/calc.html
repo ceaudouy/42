@@ -1,0 +1,59 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <form name="form">
+            <input id="nb_left" type="text" value="">
+            <select id="sign">
+                    <option value="*">*</option>
+                    <option value="-">-</option>
+                    <option value="+">+</option>
+                    <option value="/">/</option>
+                    <option value="%">%</option>
+            </select>
+            <input id="nb_right" type="text">
+            <input id="submit"type="submit" value="Try me!">
+        </form>
+        <script language="Javascript">
+                setInterval(function()  { alert("Please, use me..."); }, 30000);
+                document.getElementById('submit').onclick = function(e) {
+                    e.preventDefault();
+
+                var nb_left = document.getElementById('nb_left').value;     
+                var sign = document.getElementById('sign').value;      
+                var nb_right = document.getElementById('nb_right').value;
+                if (!Number.isInteger(nb_left) || !Number.isInteger(nb_right) || nb_left < 0 || nb_right < 0) {
+                    alert('Error :(');
+                    exit(0);
+                }
+                nb_left = Number(nb_left);
+                nb_right = Number(nb_right);
+                if (sign == '-') {
+                  var result = nb_left - nb_right;
+                }
+                if (sign == '*') {
+                  var result = nb_left * nb_right;
+                }
+                if (sign == '/') {
+                    if (nb_right == 0) {
+                        var result = "it's over 9000!";
+                    }
+                    else
+                        var result = nb_left / nb_right;
+                }
+                if (sign == '%') {
+                    if (nb_right == 0) {
+                        var result = "it's over 9000!";
+                    }
+                    else
+                        var result = nb_left % nb_right;
+                }
+                if (sign == '+') {
+                  var result = nb_left + nb_right;
+                }
+                console.log(result);
+                alert(result);
+            }
+        </script>
+    </body>
+</html>

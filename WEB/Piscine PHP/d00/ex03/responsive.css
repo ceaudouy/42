@@ -1,0 +1,58 @@
+table {
+    height: 100%;
+    width: 100%;
+}
+body {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c8/DIMendeleevCab.jpg);
+    background-repeat: repeat;
+    background-size: 150px 200px;
+}
+td, th {
+    position: relative;
+    font-size: 1vw;
+}
+font {
+    font-size: 1vw;
+}
+.border {
+    border:2px solid black;
+}
+.content{
+    float: right;
+}
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+.white {
+    background-color:white; 
+}
+.red {
+    background-color: red;
+}
+.orange {
+    background-color: rgb(255, 123, 0);
+}
+.orange2 {
+    background-color: rgb(250, 166, 88);
+}
+.green {
+    background-color: rgb(15, 223, 112);
+}
+.brun {
+    background-color: rgb(243, 182, 67);
+}
+.blue {
+    background-color: rgb(80, 170, 255);
+}
+.coral {
+    background-color: coral;
+}
+.blu {
+    background-color: rgb(144, 208, 211)
+}

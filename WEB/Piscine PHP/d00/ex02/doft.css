@@ -1,0 +1,36 @@
+html, body {
+    background-color: #5E5E5E;
+}
+.rectangle {
+    width:400px;
+    height:200px;
+    border-radius: 5px;
+    background:rgb(145, 145, 145);
+    box-shadow: 12px 12px 12px rgb(0, 0, 0);
+}
+.rectangle2 {
+    width:200px;
+    height:400px;
+    border-radius: 5px;
+    background:rgb(145, 145, 145);
+    box-shadow: 12px 12px 12px rgb(0, 0, 0);
+}
+.rectangle3 {
+    width:400px;
+    height:150px;
+    border-radius: 5px;
+    background:rgb(139, 252, 141);
+    box-shadow: 12px 12px 12px rgb(0, 0, 0);
+}
+.rectangle4 {
+    width:300px;
+    height:15px;
+    border-radius: 5px;
+    background:rgb(255, 255, 255);
+}
+.rectangle5 {
+    width:300px;
+    height:12px;
+    border-radius: 5px;
+    background:rgb(133, 132, 132);
+}

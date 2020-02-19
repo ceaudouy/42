@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <form name="form">
+            <input id="nb_left" type="text" value="">
+            <select id="sign">
+                    <option value="*">*</option>
+                    <option value="-">-</option>
+                    <option value="+">+</option>
+                    <option value="/">/</option>
+                    <option value="%">%</option>
+            </select>
+            <input id="nb_right" type="text">
+            <input id="submit"type="submit" value="Try me!">
+        </form>
+        <script>
+                setInterval(function()  { alert("Please, use me...", 'Alert Dialog'); }, 30000);
+                $('#submit').click (function(e) {
+                var nb_left = $('#nb_left').val().trim();     
+                var sign = $('#sign').val();      
+                var nb_right = $('#nb_right').val().trim();
+                
+                if (!$.isNumeric(nb_left) || !$.isNumeric(nb_right) || nb_left < 0 || nb_right < 0) {
+                    alert('Error :(', 'Alert Dialog');
+                    exit(0);
+                }
+                nb_left = Number(nb_left);
+                nb_right = Number(nb_right);
+                if (sign == '-') {
+                  var result = nb_left - nb_right;
+                }
+                if (sign == '*') {
+                  var result = nb_left * nb_right;
+                }
+                if (sign == '/') {
+                    if (nb_right == 0) {
+                        var result = "it's over 9000!";
+                    }
+                    else
+                        var result = nb_left / nb_right;
+                }
+                if (sign == '%') {
+                    if (nb_right == 0) {
+                        var result = "it's over 9000!";
+                    }
+                    else
+                        var result = nb_left % nb_right;
+                }
+                if (sign == '+') {
+                  var result = nb_left + nb_right;
+                }
+                console.log(result);
+                alert(result, 'Alert Dialog');
+            });
+        </script>
+    </body>
+</html>

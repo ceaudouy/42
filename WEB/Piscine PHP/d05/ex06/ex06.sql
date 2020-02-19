@@ -1,0 +1,1 @@
+SELECT title, summary FROM film WHERE INSTR(UPPER(summary), UPPER("Vincent")) ORDER BY id_film ASC;

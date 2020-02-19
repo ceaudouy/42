@@ -1,0 +1,1 @@
+SELECT user_card.last_name, user_card.first_name FROM user_card WHERE INSTR(last_name, '-') OR INSTR(first_name, '-') ORDER BY last_name, first_name ASC;

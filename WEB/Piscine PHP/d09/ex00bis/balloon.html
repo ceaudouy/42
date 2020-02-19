@@ -1,0 +1,58 @@
+<head>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+        <div id="ballon" style=" height: 200px; width: 200px; background-color: red; border-radius: 50%;"></div>
+        <script>
+        
+            $('#ballon').css("height", 200);
+            $('#ballon').css("width", 200);
+            
+            var w = 200;
+            var h = 200;
+            var color = "rgb(255,0,0)";
+            
+           
+
+                $('#ballon').click(function() {
+                w = w + 10;
+                h = h + 10;
+                if (w > 420 || h > 420)
+                {
+                    w = 200;
+                    h = 200;
+                    color = "rgb(0,0,255)";
+                }
+                $('#ballon').css("width", w);
+                $('#ballon').css("height", h);  
+                if (color == "rgb(255,0,0)")
+                    color = "rgb(0,255,0)";
+                else if (color == "rgb(0,255,0)")
+                    color = "rgb(0,0,255)";
+                else if (color == "rgb(0,0,255)")
+                    color = "rgb(255,0,0)";
+                $('#ballon').css("backgroundColor", color);
+
+            });
+
+             $('#ballon').mouseout(function() {
+                w = w - 5;
+                h = h - 5;
+                if (w <= 200 || h <= 200)
+                {
+                    w = 200;
+                    h = 200;
+                    color = "rgb(0,255,0)";
+                }
+                $('#ballon').css("width", w);
+                $('#ballon').css("height", h);  
+                if (color == "rgb(255,0,0)")
+                    color = "rgb(0,0,255)";
+                else if (color == "rgb(0,255,0)")
+                    color = "rgb(255,0,0)";
+                else if (color == "rgb(0,0,255)")
+                    color = "rgb(0,255,0)";
+                $('#ballon').css("backgroundColor", color);
+            });
+        </script>
+    </body>

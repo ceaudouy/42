@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT id_film) AS "films" from member_history WHERE date > 2006-10-30 AND date < 2007-07-27 OR (EXTRACT(DAY FROM date)=24 AND EXTRACT(MONTH FROM date)=12);

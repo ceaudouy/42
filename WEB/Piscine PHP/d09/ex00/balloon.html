@@ -1,0 +1,58 @@
+<head>
+</head>
+<body>
+        <div id="ballon" style=" height: 200px; width: 200px; background-color: red; border-radius: 50%;"></div>
+        <script language="Javascript">
+        
+            document.getElementById('ballon').style.height = 200+"px;";
+            document.getElementById('ballon').style.width = 200+"px";
+            document.getElementById('ballon').style.backgroundColor = "red";
+            
+            var w = 200;
+            var h = 200;
+            var color = "red";
+            document.getElementById('ballon').onclick = ft_onclick;
+            document.getElementById('ballon').onmouseout = ft_mouseout;
+
+                function ft_onclick(ballon) {
+                w = w + 10;
+                h = h + 10;
+                if (w > 420 || h > 420)
+                {
+                    w = 200;
+                    h = 200;
+                    color = "blue";
+                }
+                document.getElementById('ballon').style.width = w + "px";
+                document.getElementById('ballon').style.height = h + "px";  
+                if (color == "red")
+                    color = "green";
+                else if (color == "green")
+                    color = "blue";
+                else if (color == "blue")
+                    color = "red";
+                document.getElementById('ballon').style.backgroundColor = color;
+
+            }
+
+            function ft_mouseout(ballon) {
+                w = w - 5;
+                h = h - 5;
+                if (w <= 200 || h <= 200)
+                {
+                    w = 200;
+                    h = 200;
+                    color = "green";
+                }
+                document.getElementById('ballon').style.width = w + "px";
+                document.getElementById('ballon').style.height = h + "px";  
+                if (color == "red")
+                    color = "blue";
+                else if (color == "green")
+                    color = "red";
+                else if (color == "blue")
+                    color = "green";
+                document.getElementById('ballon').style.backgroundColor = color;
+            }
+        </script>
+    </body>
